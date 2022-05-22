@@ -5,4 +5,7 @@
     -npm install firebase
     -npm install -D tailwindcss
     -npm i daisyui
+    -npm install react-icons --save
+    -npm install react-router-dom@6
+    
 

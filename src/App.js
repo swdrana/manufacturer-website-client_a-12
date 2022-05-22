@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Login from "./Auth/Login";
 // import 'react-icons/all'
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </div>
   );
