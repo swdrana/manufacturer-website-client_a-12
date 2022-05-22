@@ -1,5 +1,5 @@
+# eTools
+## Live Site Link: [https://etools-f14f3.web.app/](https://etools-f14f3.web.app/)
 
 ## Install
     -npm install firebase
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
