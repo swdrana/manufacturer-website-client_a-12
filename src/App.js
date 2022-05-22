@@ -1,12 +1,17 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from './Pages/Home'
+import Header from "./components/Header/Header";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
 // import 'react-icons/all'
 function App() {
   return (
     <div>
-      <Home/>
-      <div class="navbar bg-base-100">
-</div>
+      <Header/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
+      </Routes>
     </div>
   );
 }
