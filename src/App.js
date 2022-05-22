@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Login from "./Auth/Login";
 import Footer from "./Pages/Footer";
+import NotFound from "./Pages/NotFound";
 // import 'react-icons/all'
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
       <Footer/>
     </div>
