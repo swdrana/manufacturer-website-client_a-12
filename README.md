@@ -3,3 +3,6 @@
 
 ## Install
     -npm install firebase
+    -npm install -D tailwindcss
+    -npm i daisyui
+
