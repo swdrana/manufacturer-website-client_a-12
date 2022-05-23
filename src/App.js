@@ -20,6 +20,7 @@ import AddProduct from "./Pages/Admin/AddProduct";
 import AdminManagement from "./Pages/Admin/AdminManagement";
 import ManageProducts from "./Pages/Admin/ManageProducts";
 import RequireAdmin from "./Auth/RequireAdmin";
+import RequireNonAdmin from "./Auth/RequireNonAdmin";
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -38,13 +39,13 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}> 
             <Route index element={<Profile/>}/>
             <Route path="profile" element={<Profile/>}/>
-            <Route path="my-orders" element={<MyOrders/>}/>
-            <Route path="add-review" element={<AddReview/>}/>
+            <Route path="my-orders" element={<RequireNonAdmin><MyOrders/></RequireNonAdmin>}/>
+            <Route path="add-review" element={<RequireNonAdmin><AddReview/></RequireNonAdmin>}/>
 
-            <Route path="manage-orders" element={<ManageOrders/>}/>
-            <Route path="add-product" element={<AddProduct/>}/>
-            <Route path="admin-management" element={<RequireAdmin><AdminManagement/></RequireAdmin>}/>
-            <Route path="manage-products" element={<ManageProducts/>}/>
+            <Route path="manage-orders" element={<RequireAdmin><ManageOrders/></RequireAdmin>}/>
+            <Route path="add-product" element={<RequireAdmin><AddProduct/></RequireAdmin>}/>
+            <Route path="admin-management" element={<RequireAdmin><AdminManagement/><AdminManagement/></RequireAdmin>}/>
+            <Route path="manage-products" element={<RequireAdmin><ManageProducts/></RequireAdmin>}/>
 
         </Route>
         <Route path="*" element={<NotFound/>}/>

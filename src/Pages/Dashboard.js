@@ -20,15 +20,20 @@ const Dashboard = () => {
             <li>
               <Link to="profile">My Profile</Link>
             </li>
-            <li>
-                <Link to="my-orders">My Orders</Link>
-            </li>
+
+            {/* Non Admin  */}
             {!admin && (
               <li>
-              <Link to="add-review">Add A Review</Link>
+                <Link to="my-orders">My Orders</Link>
+              </li>
+            )}
+            {!admin && (
+              <li>
+                <Link to="add-review">Add A Review</Link>
               </li>
             )}
 
+            {/* Only Admin  */}
             {admin && (
               <li>
                 <Link to="manage-orders">Manage All Orders</Link>
