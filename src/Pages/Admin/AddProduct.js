@@ -34,15 +34,16 @@ const AddProduct = () => {
         });
     }
     return (
-        <div>
-            <form onSubmit={handelSubmit} className="flex flex-col">
-                <input type="text" name="productName" id="" placeholder='Product Name'/>
-                <input type="number" name="price" id="" placeholder='Price'/>
-                <input type="text" name="description" id="" placeholder='Description'/>
-                <input type="number" name="minimumOrderQuantity" id="" placeholder='Minimum Order'/>
-                <input type="number" name="availableQuantity" id="" placeholder='Available Quantity'/>
-                <input type="text" name="imgLink" id="" placeholder='Image Link'/>
-                <input type="submit" className='btn' name="" id="" />
+        <div className='bg-lime-200 py-20'>
+            <h1 className='text-center text-2xl mb-5'>Add A Product</h1>
+            <form onSubmit={handelSubmit} className="flex flex-col gap-4  items-center">
+                <input type="text" name="productName" className="input w-full max-w-xs" placeholder='Product Name'/>
+                <input type="number" name="price" className="input w-full max-w-xs" placeholder='Price'/>
+                <input type="text" name="description" className="input w-full max-w-xs" placeholder='Description'/>
+                <input type="number" name="minimumOrderQuantity" className="input w-full max-w-xs" placeholder='Minimum Order'/>
+                <input type="number" name="availableQuantity" className="input w-full max-w-xs" placeholder='Available Quantity'/>
+                <input type="text" name="imgLink" className="input w-full max-w-xs" placeholder='Image Link'/>
+                <input type="submit"  name="" className="input w-full max-w-xs btn btn-primary" />
             </form>
         </div>
     );
