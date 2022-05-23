@@ -15,16 +15,16 @@ const Nav = () => {
   return (
     <div className="navbar bg-base-100  lg:px-20">
       <div className=" navbar-start">
-        {
-          location.pathname.includes('dashboard')?user && (
-            <label
-              htmlFor="dashboardSlider"
-              className="btn btn-ghost btn-circle avatar drawer-button lg:hidden"
-            >
-              <BiSlider size={20} />
-            </label>
-          ):''
-        }
+        {location.pathname.includes("dashboard")
+          ? user && (
+              <label
+                htmlFor="dashboardSlider"
+                className="btn btn-ghost btn-circle avatar drawer-button lg:hidden"
+              >
+                <BiSlider size={20} />
+              </label>
+            )
+          : ""}
 
         <Link to="/" className="btn btn-ghost normal-case text-3xl p-0">
           eTools
@@ -151,22 +151,33 @@ const Nav = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Item 1</a>
-              </li>
-              <li tabIndex="0">
-                <a>Parent</a>
-                {/* <ul className="p-2 ">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul> */}
+                <Link to="services">Services</Link>
               </li>
               <li>
-                <a>Item 3</a>
+                <Link to="about">About</Link>
               </li>
+              {user && (
+                <li>
+                  <Link to="dashboard">Dashboard</Link>
+                </li>
+              )}
+              {!user && (
+                <li>
+                  <Link to="login" className="btn btn-outline btn-primary">
+                    Login
+                  </Link>
+                </li>
+              )}
+              {!user && (
+                <li>
+                  <Link
+                    to="signup"
+                    className="btn btn-error text-black-100 ml-4"
+                  >
+                    Create Account
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

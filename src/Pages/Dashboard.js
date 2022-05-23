@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
+  const [admin] = useAdmin();
   return (
     <div>
       <div className="drawer drawer-mobile">
@@ -19,11 +21,34 @@ const Dashboard = () => {
               <Link to="profile">My Profile</Link>
             </li>
             <li>
+                <Link to="my-orders">My Orders</Link>
+            </li>
+            {!admin && (
+              <li>
               <Link to="add-review">Add A Review</Link>
-            </li>
-            <li>
-              <Link to="my-orders">My Orders</Link>
-            </li>
+              </li>
+            )}
+
+            {admin && (
+              <li>
+                <Link to="manage-orders">Manage All Orders</Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link to="add-product">Add Product</Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link to="admin-management">Admin Management</Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link to="manage-products">Manage Products</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
