@@ -3,7 +3,7 @@ import React from "react";
 const Review = () => {
   return (
     <div>
-      <div class="card card-compact w-64 bg-base-100 shadow-xl flex py-10 items-center">
+      <div class="card card-compact w-64 bg-base-100 shadow-xl flex py-10 items-center mx-16 md:mx-28 lg:mx-0">
         <div class="avatar">
           <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
             <img src="https://api.lorem.space/image/face?hash=3174" />

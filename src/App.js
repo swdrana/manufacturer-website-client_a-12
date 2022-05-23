@@ -6,8 +6,13 @@ import About from "./Pages/About";
 import Login from "./Auth/Login";
 import Footer from "./Pages/Footer";
 import NotFound from "./Pages/NotFound";
+import { useEffect } from "react";
+import AOS from 'aos';
 // import 'react-icons/all'
 function App() {
+  useEffect(()=>{
+    AOS.init();
+  },[])
   return (
     <div>
       <Header/>
