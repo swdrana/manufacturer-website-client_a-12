@@ -1,54 +1,57 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import Purchase from "../Pages/Order/Purchase";
 
-const Product = () => {
+const Product = ({ product }) => {
+  const {
+    _id,
+    productName,
+    price,
+    minimumOrderQuantity,
+    availableQuantity,
+    description,
+    imgLink,
+  } = product;
+  const navigate=useNavigate();
+  const goPurchase = ()=>{
+    navigate(`/purchase/${_id}`);
+  }
   return (
     <div>
-      <div className="card card-compact w-80 bg-base-100 shadow-xl">
+      <div className="card card-compact w-80 bg-base-200 shadow-xl">
         <figure>
           <img
-            src="https://api.lorem.space/image/shoes?w=400&h=225"
-            alt="Shoes"
+            src={imgLink}
+            alt={productName}
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>
-            If a dog chews shoes whose shoes does he choose? If a dog chews
-            shoes whose shoes does he choose? If a dog chews shoes whose shoes
-            does he choose?
-          </p>
-          <div className="flex justify-evenly text-center">
-            <div className=" w-1/3">
+          <h2 className="card-title">{productName}</h2>
+          <p>{description.length>200?description.slice(0,200):description}</p>
+          <div className="flex justify-evenly text-center ">
+            <div className=" w-1/3 ">
               <p className=" text-secondary">
                 Minimum
                 <span className=" text-red-600 font-extrabold text-xl block">
-                  100
-                </span>{" "}
-                Quantity{" "}
+                  {minimumOrderQuantity}
+                </span>
+                Quantity
               </p>
             </div>
             <div className=" w-1/3">
               <p className=" text-secondary">
-                Available
-                <span className=" text-lime-600 font-extrabold text-xl block">
-                  1900
-                </span>{" "}
-                Items{" "}
+                Available<span className=" text-lime-600 font-extrabold text-xl block">{availableQuantity}</span>Items
               </p>
             </div>
             <div className=" w-1/3">
               <p className=" text-secondary">
                 Price
-                <span className=" text-blue-600 font-extrabold text-xl block">
-                  {" "}
-                  $120
-                </span>{" "}
-                Per unit{" "}
+                <span className=" text-blue-600 font-extrabold text-xl block">${price}</span>Per Item
               </p>
             </div>
           </div>
           <div className="card-actions justify-center my-4">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary" onClick={goPurchase}>Buy Now</button>
           </div>
         </div>
       </div>

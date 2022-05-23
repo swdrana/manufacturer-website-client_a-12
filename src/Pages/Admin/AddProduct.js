@@ -34,7 +34,7 @@ const AddProduct = () => {
         });
     }
     return (
-        <div className='bg-lime-200 py-20'>
+        <div className='py-20 h-full rounded-xl'>
             <h1 className='text-center text-2xl mb-5'>Add A Product</h1>
             <form onSubmit={handelSubmit} className="flex flex-col gap-4  items-center">
                 <input type="text" name="productName" className="input w-full max-w-xs" placeholder='Product Name'/>

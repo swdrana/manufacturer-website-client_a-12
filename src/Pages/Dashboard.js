@@ -1,21 +1,31 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import { BiSlider } from "react-icons/bi";
 
 const Dashboard = () => {
   const [admin] = useAdmin();
   return (
     <div>
-      <div className="drawer drawer-mobile">
+      <div className="drawer drawer-mobile bg-neutral">
         <input id="dashboardSlider" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* <!-- Page content here --> */}
           {/* <h1>Dashboard</h1> */}
+          <div className="flex justify-end mr-3">
+            <label
+              htmlFor="dashboardSlider"
+              className="btn btn-ghost btn-circle avatar drawer-button lg:hidden"
+            >
+              <BiSlider size={20} />
+            </label>
+            
+          </div>
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side ">
           <label htmlFor="dashboardSlider" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-200  text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
               <Link to="profile">My Profile</Link>

@@ -7,7 +7,7 @@ const Profile = () => {
   const fullname = user?.displayName.split(" ");
   console.log(user);
   if (loading) {
-    return console.log(1);
+    return <p>Loading</p>;
   }
   return (
     <div>

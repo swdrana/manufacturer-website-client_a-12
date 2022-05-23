@@ -21,6 +21,7 @@ import AdminManagement from "./Pages/Admin/AdminManagement";
 import ManageProducts from "./Pages/Admin/ManageProducts";
 import RequireAdmin from "./Auth/RequireAdmin";
 import RequireNonAdmin from "./Auth/RequireNonAdmin";
+import Purchase from "./Pages/Order/Purchase";
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/services" element={<RequireAuth><Services/></RequireAuth>}/>
+        <Route path="/purchase/:_id" element={<RequireAuth><Purchase/></RequireAuth>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/profile" element={<Profile/>}/>
@@ -46,7 +48,6 @@ function App() {
             <Route path="add-product" element={<RequireAdmin><AddProduct/></RequireAdmin>}/>
             <Route path="admin-management" element={<RequireAdmin><AdminManagement/><AdminManagement/></RequireAdmin>}/>
             <Route path="manage-products" element={<RequireAdmin><ManageProducts/></RequireAdmin>}/>
-
         </Route>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
