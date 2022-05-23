@@ -8,6 +8,8 @@
     -npm install react-icons --save
     -npm install react-router-dom@6
     -npm install react-multi-carousel --save
+    -npm install --save aos@next
+
     
     
 
