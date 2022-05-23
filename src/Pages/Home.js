@@ -5,6 +5,7 @@ import ReviewSec from "./Home/ReviewSec";
 import Top10 from "./Home/Top10";
 import FeatureTools from "./Home/FeatureTools";
 import BannerSec from "./Home/BannerSec";
+import Teams from "./Home/Teams";
 const Home = () => {
   return (
     <div>
@@ -12,6 +13,7 @@ const Home = () => {
       <FeatureTools />
       <Counter />
       <Top10 />
+      <Teams/>
       <ReviewSec />
     </div>
   );

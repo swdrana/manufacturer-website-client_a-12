@@ -1,5 +1,5 @@
 import React from 'react';
-import './BannerSec.css'
+import './Home.css'
 const BannerSec = () => {
     return (
         <div class="hero min-h-screen banner-bg">
