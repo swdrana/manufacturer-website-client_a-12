@@ -1,14 +1,13 @@
-import React from 'react';
-import Carousel from 'react-multi-carousel';
-import Review from '../../components/Review';
+import React from "react";
+import Carousel from "react-multi-carousel";
+import Review from "../../components/Review";
 
 const ReviewSec = () => {
-    return (
-        <div>
-            
+  return (
+    <div>
       <div className="flex flex-col lg:flex-row justify-center items-center py-20 bg-slate-400">
         <div className="w-full lg:w-2/5">
-          <h1 class="text-5xl font-bold text-center mb-20 lg:mb-0">
+          <h1 className="text-5xl font-bold text-center mb-20 lg:mb-0">
             Our Client’s Speak
           </h1>
         </div>
@@ -19,12 +18,12 @@ const ReviewSec = () => {
             autoPlaySpeed={3000}
             centerMode={false}
             className=""
-            containerClass="container"
-            dotListClass=""
+            containerclassName="container"
+            dotListclassName=""
             draggable
             focusOnSelect={false}
             infinite
-            itemClass=""
+            itemclassName=""
             keyBoardControl
             minimumTouchDrag={80}
             partialVisible
@@ -57,7 +56,7 @@ const ReviewSec = () => {
               },
             }}
             showDots={false}
-            sliderClass=""
+            sliderclassName=""
             slidesToSlide={1}
             swipeable
           >
@@ -68,8 +67,8 @@ const ReviewSec = () => {
           </Carousel>
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ReviewSec;
