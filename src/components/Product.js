@@ -3,7 +3,7 @@ import React from "react";
 const Product = () => {
   return (
     <div>
-      <div class="card card-compact w-96 bg-base-100 shadow-xl">
+      <div class="card card-compact w-80 bg-base-100 shadow-xl">
         <figure>
           <img
             src="https://api.lorem.space/image/shoes?w=400&h=225"
@@ -12,8 +12,19 @@ const Product = () => {
         </figure>
         <div class="card-body">
           <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
+          <p>If a dog chews shoes whose shoes does he choose? If a dog chews shoes whose shoes does he choose? If a dog chews shoes whose shoes does he choose?</p>
+          <div className="flex justify-evenly text-center">
+          <div className=" w-1/3"> 
+            <p className=" text-secondary">Minimum<span className=" text-red-600 font-extrabold text-xl block">100</span> Quantity </p>
+          </div>
+          <div className=" w-1/3"> 
+            <p className=" text-secondary">Available<span className=" text-lime-600 font-extrabold text-xl block">1900</span> Items </p>
+          </div>
+          <div className=" w-1/3"> 
+            <p className=" text-secondary">Price<span className=" text-blue-600 font-extrabold text-xl block"> $120</span> Per unit </p>
+          </div>
+          </div>
+          <div class="card-actions justify-center my-4">
             <button class="btn btn-primary">Buy Now</button>
           </div>
         </div>

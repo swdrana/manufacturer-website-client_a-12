@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleSignIn from "./GoogleSignIn";
 
 const Login = () => {
   return (
@@ -27,9 +28,7 @@ const Login = () => {
             </div>
           </div>
           <div class="divider">OR</div>
-          <div className=" px-8 pb-8">
-          <button class="btn btn-primary w-full  btn-outline">Continue with Google</button>
-          </div>
+          <GoogleSignIn/>
         </div>
       </div>
     </div>

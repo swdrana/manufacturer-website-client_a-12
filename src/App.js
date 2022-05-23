@@ -8,6 +8,7 @@ import Footer from "./Pages/Footer";
 import NotFound from "./Pages/NotFound";
 import { useEffect } from "react";
 import AOS from 'aos';
+import Services from "./Pages/Services";
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/services" element={<Services/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>

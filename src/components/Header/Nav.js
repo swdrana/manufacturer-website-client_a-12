@@ -18,6 +18,9 @@ const Nav = () => {
             <li>
               <Link to="about">About</Link>
             </li>
+            <li>
+              <Link to="services">Services</Link>
+            </li>
             <li tabIndex="0">
               <a>
                 Parent
