@@ -18,27 +18,32 @@ const Review = () => {
             <input
               type="radio"
               name="rating-2"
+              readOnly
               className="mask mask-star-2 bg-orange-400"
             />
             <input
               type="radio"
               name="rating-2"
+              readOnly
               className="mask mask-star-2 bg-orange-400"
               checked
             />
             <input
               type="radio"
               name="rating-2"
+              readOnly
               className="mask mask-star-2 bg-orange-400"
             />
             <input
               type="radio"
               name="rating-2"
+              readOnly
               className="mask mask-star-2 bg-orange-400"
             />
             <input
               type="radio"
               name="rating-2"
+              readOnly
               className="mask mask-star-2 bg-orange-400"
             />
           </div>

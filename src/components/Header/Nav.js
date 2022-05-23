@@ -1,19 +1,31 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-
+import { BiSlider } from "react-icons/bi";
 const Nav = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const location = useLocation();
   const logout = () => {
     signOut(auth);
-    navigate('/');
+    navigate("/");
   };
   return (
     <div className="navbar bg-base-100  lg:px-20">
       <div className=" navbar-start">
+        {
+          location.pathname.includes('dashboard')?user && (
+            <label
+              htmlFor="dashboardSlider"
+              className="btn btn-ghost btn-circle avatar drawer-button lg:hidden"
+            >
+              <BiSlider size={20} />
+            </label>
+          ):''
+        }
+
         <Link to="/" className="btn btn-ghost normal-case text-3xl p-0">
           eTools
         </Link>
@@ -29,24 +41,25 @@ const Nav = () => {
             <li>
               <Link to="about">About</Link>
             </li>
-            {
-              user && 
+            {user && (
               <li>
                 <Link to="dashboard">Dashboard</Link>
               </li>
-            }
-            {
-              !user && 
+            )}
+            {!user && (
               <li>
-                <Link to="login" className="btn btn-outline btn-primary">Login</Link>
+                <Link to="login" className="btn btn-outline btn-primary">
+                  Login
+                </Link>
               </li>
-            }
-            {
-              !user && 
+            )}
+            {!user && (
               <li>
-                <Link to="signup" className="btn btn-error text-black-100 ml-4">Create Account</Link>
+                <Link to="signup" className="btn btn-error text-black-100 ml-4">
+                  Create Account
+                </Link>
               </li>
-            }
+            )}
           </ul>
         </div>
         {/* Cart  */}
@@ -113,8 +126,7 @@ const Nav = () => {
               </li>
             </ul>
           </div>
-        ) 
-        }
+        )}
         {/* Mobile Version Menu  */}
         <div>
           <div className="dropdown dropdown-end">
