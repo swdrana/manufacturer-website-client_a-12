@@ -3,15 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Purchase from "../Pages/Order/Purchase";
 
 const Product = ({ product }) => {
-  const {
-    _id,
-    productName,
-    price,
-    minimumOrderQuantity,
-    availableQuantity,
-    description,
-    imgLink,
-  } = product;
+  const {_id, productName, price, minimumOrderQuantity, availableQuantity, description, imgLink, } = product;
   const navigate=useNavigate();
   const goPurchase = ()=>{
     navigate(`/purchase/${_id}`);
