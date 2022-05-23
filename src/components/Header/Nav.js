@@ -27,11 +27,14 @@ const Nav = () => {
               <Link to="services">Services</Link>
             </li>
             <li>
-              <a>Item 3</a>
-            </li>
-            <li>
               <Link to="about">About</Link>
             </li>
+            {
+              user && 
+              <li>
+                <Link to="dashboard">Dashboard</Link>
+              </li>
+            }
             {
               !user && 
               <li>
@@ -41,7 +44,7 @@ const Nav = () => {
             {
               !user && 
               <li>
-                <Link to="signup" className="btn btn-error text-purple-100 ml-4">Create Account</Link>
+                <Link to="signup" className="btn btn-error text-black-100 ml-4">Create Account</Link>
               </li>
             }
           </ul>
@@ -98,10 +101,9 @@ const Nav = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
+                <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a>Settings</a>

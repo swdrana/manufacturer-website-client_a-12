@@ -5,7 +5,13 @@ import GoogleSignIn from "./GoogleSignIn";
 const SignUp = () => {
   const handelForm = (e) => {
     e.preventDefault();
-    console.log(e);
+    const fName = e.target.fname.value;
+    const lName = e.target.lname.value;
+    const eMail = e.target.email.value;
+    const password = e.target.password.value;
+    const cPassword = e.target.conformpassword.value;
+    const photo = e.target.photo.value;
+    console.log(fName, lName, eMail, password, cPassword, photo);
   };
   return (
     <div>
@@ -19,6 +25,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   placeholder="First Name"
+                  name="fname"
                   className="input input-bordered"
                   required
                 />
@@ -27,6 +34,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   placeholder="Last Name"
+                  name="lname"
                   className="input input-bordered"
                   required
                 />
@@ -38,6 +46,7 @@ const SignUp = () => {
               <input
                 type="email"
                 placeholder="E-mail"
+                name="email"
                 className="input input-bordered"
                 required
               />
@@ -48,6 +57,7 @@ const SignUp = () => {
               <input
                 type="tel"
                 placeholder="Phone"
+                name="phone"
                 className="input input-bordered"
                 required
               />
@@ -60,12 +70,14 @@ const SignUp = () => {
                   placeholder="Password"
                   className="input input-bordered"
                   required
+                  name="password"
                 />
               </div>
               <div className="form-control w-1/2">
                 <input
                   type="password"
                   placeholder="Conform Password"
+                  name="conformpassword"
                   className="input input-bordered"
                   required
                 />
@@ -75,6 +87,7 @@ const SignUp = () => {
               <input
                 type="file"
                 placeholder="Photos"
+                name="photo"
                 className="input input-bordered"
                 required
               />
