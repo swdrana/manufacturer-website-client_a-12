@@ -4,15 +4,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { BiSlider } from "react-icons/bi";
-import useOrders from "../../hooks/useOrders";
+import { BsPersonCircle } from "react-icons/bs";
+import useCart from "../../hooks/useCart";
 
 const Nav = () => {
-  const [orders, setOrders] = useOrders();
-  let subTotal = 0;
-  orders.map((o) => {
-    subTotal=o.totalPrice + subTotal;
-  });
   const [user] = useAuthState(auth);
+  const [cart, setCart] = useCart(user?.email);
+  let subTotal = 0;
+  cart.map((o) => {
+    subTotal = o.totalPrice + subTotal;
+  });
   const navigate = useNavigate();
   const location = useLocation();
   const logout = () => {
@@ -89,7 +90,7 @@ const Nav = () => {
                   />
                 </svg>
                 <span className="badge badge-sm indicator-item">
-                  {orders.length}
+                  {cart.length}
                 </span>
               </div>
             </label>
@@ -98,10 +99,10 @@ const Nav = () => {
               className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg">{orders.length} Items</span>
+                <span className="font-bold text-lg">{cart.length} Items</span>
                 <span className="text-info">Subtotal:${subTotal}</span>
                 <div className="card-actions">
-                  <Link to='/cart' className="btn btn-primary btn-block">
+                  <Link to="/cart" className="btn btn-primary btn-block">
                     View cart
                   </Link>
                 </div>
@@ -115,7 +116,7 @@ const Nav = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://api.lorem.space/image/face?hash=33791" />
+                <img src={user?.photoURL}/>
               </div>
             </label>
             <ul

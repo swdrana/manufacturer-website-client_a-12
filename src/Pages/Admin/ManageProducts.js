@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import Loading from "../../components/Loading";
 import useProducts from "../../hooks/useProducts";
 
 const ManageProducts = () => {
   const [products, setProducts] = useProducts();
   const [deleteItem, setDeleteItem] = useState("");
+  if(!products.length){
+    <Loading/>
+  }
   return (
     <div>
       <div className="">

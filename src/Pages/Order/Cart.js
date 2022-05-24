@@ -1,11 +1,13 @@
-import useOrders from "../../hooks/useOrders";
 import { MdCancel } from "react-icons/md";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import useCart from "../../hooks/useCart";
+import Loading from "../../components/Loading";
 const Cart = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [orders, setOrders] = useOrders();
+
+  const [cart, setCart] = useCart(user?.email);
   const [deleteItem, setDeleteItem] = useState("");
   const handelDelete = () => {
     fetch(`http://localhost:8080/deleteOrder/${deleteItem}`, {
@@ -14,19 +16,23 @@ const Cart = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
-          const remaining = orders.filter((odr) => odr._id !== deleteItem);
-          setOrders(remaining);
+          const remaining = cart.filter((odr) => odr._id !== deleteItem);
+          setCart(remaining);
         }
       });
   };
 
-
-
-  const handelCartForm = e =>{
-      e.preventDefault();
-      const phone = e.target.tel.value;
-      const address = e.target.address.value;
-      console.log(phone, address);
+  const handelCartForm = (e) => {
+    e.preventDefault();
+    const phone = e.target.tel.value;
+    const address = e.target.address.value;
+    console.log(phone, address);
+  };
+  
+  if(!cart.length){
+      return  <h1 className="text-center text-2xl text-secondary">
+        Your cart is empty
+      </h1>
   }
   return (
     <div className="lg:px-20">
@@ -50,7 +56,7 @@ const Cart = () => {
         </label>
       </label>
 
-      {orders.length === 0 ? (
+      {cart.length === 0 ? (
         <h1 className="text-center text-2xl text-secondary">
           Your cart is empty
         </h1>
@@ -68,7 +74,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order, index) => {
+              {cart.map((order, index) => {
                 const {
                   _id,
                   productId,
@@ -160,7 +166,11 @@ const Cart = () => {
                 name="address"
                 placeholder="Your Address"
               ></textarea>
-              <input className="btn btn-primary my-10" type="submit" value="Place Order" />
+              <input
+                className="btn btn-primary my-10"
+                type="submit"
+                value="Place Order"
+              />
             </form>
           </div>
         </div>
