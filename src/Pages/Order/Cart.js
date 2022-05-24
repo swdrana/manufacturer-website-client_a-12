@@ -5,11 +5,13 @@ import auth from "../../firebase.init";
 import useCart from "../../hooks/useCart";
 import Loading from "../../components/Loading";
 import useUserInfo from "../../hooks/useUserInfo";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [user, loading, error] = useAuthState(auth);
   const [cart, setCart] = useCart(user?.email);
   const [deleteItem, setDeleteItem] = useState("");
   const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate()
   if(loading){
     return <Loading/>
   }
@@ -54,13 +56,12 @@ const Cart = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-  
+          navigate('/payment');
           // toast.info("Updated Done!", { theme: "colored" });
           // e.target.reset();
         });
       }
     }
-
   };
   
   if(!cart.length){
