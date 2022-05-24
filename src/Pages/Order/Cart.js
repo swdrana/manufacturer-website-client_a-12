@@ -26,7 +26,30 @@ const Cart = () => {
     e.preventDefault();
     const phone = e.target.tel.value;
     const address = e.target.address.value;
-    console.log(phone, address);
+    const updatedUserInfo = {phone, address};
+    if(user){
+      const email = user.email;
+      console.log(updatedUserInfo);   
+      // send updated product to database
+      if(email!==null){
+  
+      fetch(`http://localhost:8080/newUser/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedUserInfo),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+  
+          // toast.info("Updated Done!", { theme: "colored" });
+          // e.target.reset();
+        });
+      }
+    }
+
   };
   
   if(!cart.length){
