@@ -5,7 +5,7 @@ import auth from "../firebase.init";
 const Profile = () => {
   const [user, loading, error] = useAuthState(auth);
   const fullname = user?.displayName.split(" ");
-  console.log(user);
+  // console.log(user);
   if (loading) {
     return <p>Loading</p>;
   }

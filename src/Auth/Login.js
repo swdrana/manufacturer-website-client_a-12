@@ -6,7 +6,6 @@ import GoogleSignIn from "./GoogleSignIn";
 
 const Login = () => {
   const [user] = useAuthState(auth);
-
   if(user){
     const email = user.email;
     console.log(user);   

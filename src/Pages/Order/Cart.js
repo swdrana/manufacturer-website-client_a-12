@@ -1,14 +1,25 @@
 import { MdCancel } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useCart from "../../hooks/useCart";
 import Loading from "../../components/Loading";
+import useUserInfo from "../../hooks/useUserInfo";
 const Cart = () => {
   const [user, loading, error] = useAuthState(auth);
-
   const [cart, setCart] = useCart(user?.email);
   const [deleteItem, setDeleteItem] = useState("");
+  const [userInfo, setUserInfo] = useState({});
+  if(loading){
+    return <Loading/>
+  }
+  if(user){
+    fetch(`http://localhost:8080/userInfo/${user.email}`)
+    .then((res) => res.json())
+    .then((data) => setUserInfo(data));
+  }
+  // console.log(userInfo);
+  
   const handelDelete = () => {
     fetch(`http://localhost:8080/deleteOrder/${deleteItem}`, {
       method: "DELETE",
@@ -177,6 +188,7 @@ const Cart = () => {
                 <input
                   type="tel"
                   name="tel"
+                  defaultValue={userInfo?.phone}
                   class="input  input-bordered w-full rounded-xl"
                 />
               </label>
@@ -187,6 +199,7 @@ const Cart = () => {
               <textarea
                 class="textarea textarea-bordered h-24"
                 name="address"
+                defaultValue={userInfo?.address}
                 placeholder="Your Address"
               ></textarea>
               <input

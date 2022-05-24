@@ -14,6 +14,7 @@ const Nav = () => {
   cart.map((o) => {
     subTotal = o.totalPrice + subTotal;
   });
+  // console.log(cart);
   const navigate = useNavigate();
   const location = useLocation();
   const logout = () => {
