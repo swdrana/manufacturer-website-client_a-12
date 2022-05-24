@@ -11,7 +11,6 @@ const Nav = () => {
   let subTotal = 0;
   orders.map((o) => {
     subTotal=o.totalPrice + subTotal;
-    console.log(subTotal);
   });
   const [user] = useAuthState(auth);
   const navigate = useNavigate();

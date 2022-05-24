@@ -22,15 +22,22 @@ const Purchase = () => {
   } = product;
   const [myOrderQuantity, setMyOrderQuantity] = useState(0);
   let totalPrice = myOrderQuantity * price === 0 ? minimumOrderQuantity * price : myOrderQuantity * price;
-  const handelSubmit = (e) =>{
+  const handelSubmit = async (e) =>{
       e.preventDefault();
-        setMyOrderQuantity(Number.parseInt(e.target.myOrderQuantity.value));
+      await  setMyOrderQuantity(minimumOrderQuantity);
+      await  setMyOrderQuantity(Number.parseInt(e.target.myOrderQuantity.value));
 
       if(loading){
         return <h1>Loading...</h1>
       }
       const userEmail = user.email;
-      const item = {productId:`${id}`, myOrderQuantity, totalPrice, userEmail}
+      const item = {productId:`${id}`, myOrderQuantity: Number.parseInt(e.target.myOrderQuantity.value), totalPrice, userEmail, 
+      productName,
+      price,
+      minimumOrderQuantity,
+      availableQuantity,
+      description,
+      imgLink }
       console.log(item);
 
     // send data to the server
