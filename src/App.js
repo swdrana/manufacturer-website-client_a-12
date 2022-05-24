@@ -22,6 +22,7 @@ import ManageProducts from "./Pages/Admin/ManageProducts";
 import RequireAdmin from "./Auth/RequireAdmin";
 import RequireNonAdmin from "./Auth/RequireNonAdmin";
 import Purchase from "./Pages/Order/Purchase";
+import Cart from "./Pages/Order/Cart";
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -38,7 +39,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/cart" element={<Profile/>}/>
+        <Route path="/cart" element={<Cart/>}/>
         <Route path="/dashboard" element={<Dashboard/>}> 
             <Route index element={<Profile/>}/>
             <Route path="profile" element={<Profile/>}/>
