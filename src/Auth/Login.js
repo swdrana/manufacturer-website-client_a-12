@@ -1,8 +1,34 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../firebase.init";
 import GoogleSignIn from "./GoogleSignIn";
 
 const Login = () => {
+  const [user] = useAuthState(auth);
+
+  if(user){
+    const email = user.email;
+    console.log(user);   
+    // send updated product to database
+    if(email!==null){
+
+    fetch(`http://localhost:8080/newUser/${email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        // toast.info("Updated Done!", { theme: "colored" });
+        // e.target.reset();
+      });
+    }
+  }
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col w-full">

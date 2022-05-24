@@ -6,7 +6,10 @@ import Top10 from "./Home/Top10";
 import FeatureTools from "./Home/FeatureTools";
 import BannerSec from "./Home/BannerSec";
 import Teams from "./Home/Teams";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
 const Home = () => {
+  const [user] = useAuthState(auth);
   return (
     <div>
       <BannerSec />

@@ -1,8 +1,34 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../firebase.init";
 import GoogleSignIn from "./GoogleSignIn";
 
 const SignUp = () => {
+  const [user] = useAuthState(auth);
+
+  if(user){
+    const email = user.email;
+    console.log(user);   
+    // send updated product to database
+    if(email!==null){
+
+    fetch(`http://localhost:8080/newUser/${email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        // toast.info("Updated Done!", { theme: "colored" });
+        // e.target.reset();
+      });
+    }
+  }
   const handelForm = (e) => {
     e.preventDefault();
     const fName = e.target.fname.value;

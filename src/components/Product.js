@@ -19,7 +19,7 @@ const Product = ({ product }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">{productName}</h2>
-          <p>{description.length>200?description.slice(0,200):description}</p>
+          <p>{description?.length>200?description.slice(0,200):description}</p>
           <div className="flex justify-evenly text-center ">
             <div className=" w-1/3 ">
               <p className=" text-secondary">
