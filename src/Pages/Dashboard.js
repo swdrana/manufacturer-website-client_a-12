@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [admin] = useAdmin();
   return (
     <div>
-      <div className="drawer drawer-mobile bg-neutral">
+      <div className="drawer drawer-mobile bg-base-200">
         <input id="dashboardSlider" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* <!-- Page content here --> */}
@@ -23,9 +23,9 @@ const Dashboard = () => {
           </div>
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side">
           <label htmlFor="dashboardSlider" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-200  text-base-content">
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-300  text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
               <Link to="profile">My Profile</Link>
@@ -46,22 +46,22 @@ const Dashboard = () => {
             {/* Only Admin  */}
             {admin && (
               <li>
-                <Link to="manage-orders">Manage All Orders</Link>
-              </li>
-            )}
-            {admin && (
-              <li>
                 <Link to="add-product">Add Product</Link>
               </li>
             )}
             {admin && (
               <li>
-                <Link to="admin-management">Admin Management</Link>
+                <Link to="manage-products">Manage Products</Link>
               </li>
             )}
             {admin && (
               <li>
-                <Link to="manage-products">Manage Products</Link>
+                <Link to="manage-orders">Manage All Orders</Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link to="admin-management">Admin Management</Link>
               </li>
             )}
           </ul>
