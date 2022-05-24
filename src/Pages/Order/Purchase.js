@@ -38,7 +38,7 @@ const Purchase = () => {
       availableQuantity,
       description,
       imgLink }
-      console.log(item);
+      // console.log(item);
 
     // send data to the server
     fetch("http://localhost:8080/newOrder", {

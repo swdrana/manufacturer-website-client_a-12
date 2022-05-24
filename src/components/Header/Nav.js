@@ -12,7 +12,9 @@ const Nav = () => {
   const [cart, setCart] = useCart(user?.email);
   let subTotal = 0;
   cart.map((o) => {
-    subTotal = o.totalPrice + subTotal;
+    if (!o.isPaid) {
+      subTotal = o.totalPrice + subTotal;
+    }
   });
   // console.log(cart);
   const navigate = useNavigate();

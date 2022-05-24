@@ -11,17 +11,23 @@ const Cart = () => {
   const [cart, setCart] = useCart(user?.email);
   const [deleteItem, setDeleteItem] = useState("");
   const [userInfo, setUserInfo] = useState({});
-  const navigate = useNavigate()
-  if(loading){
-    return <Loading/>
+  let subTotal = 0;
+  cart.map((o) => {
+    if (!o.isPaid) {
+      subTotal = o.totalPrice + subTotal;
+    }
+  });
+  const navigate = useNavigate();
+  if (loading) {
+    return <Loading />;
   }
-  if(user){
+  if (user) {
     fetch(`http://localhost:8080/userInfo/${user.email}`)
-    .then((res) => res.json())
-    .then((data) => setUserInfo(data));
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data));
   }
   // console.log(userInfo);
-  
+
   const handelDelete = () => {
     fetch(`http://localhost:8080/deleteOrder/${deleteItem}`, {
       method: "DELETE",
@@ -39,52 +45,54 @@ const Cart = () => {
     e.preventDefault();
     const phone = e.target.tel.value;
     const address = e.target.address.value;
-    const updatedUserInfo = {phone, address};
-    if(user){
+    const updatedUserInfo = { phone, address };
+    if (user) {
       const email = user.email;
-      console.log(updatedUserInfo);   
+      // console.log(updatedUserInfo);
+
       // send updated product to database
-      if(email!==null){
-  
-      fetch(`http://localhost:8080/newUser/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedUserInfo),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          navigate('/payment');
-          // toast.info("Updated Done!", { theme: "colored" });
-          // e.target.reset();
-        });
+      if (email !== null) {
+        fetch(`http://localhost:8080/newUser/${email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(updatedUserInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            navigate("/payment");
+            // toast.info("Updated Done!", { theme: "colored" });
+            // e.target.reset();
+          });
       }
     }
   };
-  
-  if(!cart.length){
-      return  <h1 className="text-center text-2xl text-secondary">
+
+  if (!cart.length) {
+    return (
+      <h1 className="text-center text-2xl text-secondary">
         Your cart is empty
       </h1>
+    );
   }
   return (
     <div className="lg:px-20">
       <input type="checkbox" id="conform-delete" className="modal-toggle" />
-      <label for="conform-delete" className="modal cursor-pointer">
-        <label className="modal-box relative" for="">
+      <label htmlFor="conform-delete" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold">Are you sure want to delete?</h3>
 
           <div className="modal-action">
             <label
-              for="conform-delete"
+              htmlFor="conform-delete"
               className="btn btn-error float-right "
               onClick={handelDelete}
             >
               Yes
             </label>
-            <label for="conform-delete" className="btn btn-success">
+            <label htmlFor="conform-delete" className="btn btn-success">
               No
             </label>
           </div>
@@ -97,7 +105,7 @@ const Cart = () => {
         </h1>
       ) : (
         <div className="flex  flex-col lg:flex-row w-full ">
-          <table class="table w-full lg:w-2/3">
+          <table className="table w-full lg:w-2/3">
             <thead>
               <tr className="text-center">
                 <th></th>
@@ -122,9 +130,10 @@ const Cart = () => {
                   availableQuantity,
                   description,
                   imgLink,
+                  isPaid,
                 } = order;
                 return (
-                  <tr key={order._id}>
+                  <tr key={order._id} className="">
                     <th>{index + 1}</th>
                     <th>{productName}</th>
                     <td>
@@ -137,17 +146,21 @@ const Cart = () => {
                     <td>{myOrderQuantity}</td>
                     <td>$ {totalPrice}</td>
                     <td>
-                      <label
-                        for="conform-delete"
-                        className="btn bg-transparent hero-overlay border-0 hover:bg-transparent btn-sm"
-                        onClick={() => setDeleteItem(_id)}
-                      >
-                        <MdCancel
-                          className=" hover:text-primary"
-                          size={20}
-                          color="red"
-                        />
-                      </label>
+                      {isPaid ? (
+                        <p>Paid</p>
+                      ) : (
+                        <label
+                          htmlFor="conform-delete"
+                          className="btn bg-transparent hero-overlay border-0 hover:bg-transparent btn-sm"
+                          onClick={() => setDeleteItem(_id)}
+                        >
+                          <MdCancel
+                            className=" hover:text-primary"
+                            size={20}
+                            color="red"
+                          />
+                        </label>
+                      )}
                     </td>
                   </tr>
                 );
@@ -155,56 +168,57 @@ const Cart = () => {
             </tbody>
           </table>
           <div className="flex flex-col w-full lg:1/3 p-20 justify-center">
-            <form class="form-control" onSubmit={handelCartForm}>
-              <label class="label">
-                <span class="label-text">Your Name</span>
+            <form className="form-control" onSubmit={handelCartForm}>
+              <label className="label">
+                <span className="label-text">Your Name</span>
               </label>
-              <label class="input-group">
+              <label className="input-group">
                 <input
                   type="text"
                   defaultValue={user?.displayName}
                   readOnly
                   disabled
-                  class="input w-full "
+                  className="input w-full "
                 />
               </label>
 
-              <label class="label">
-                <span class="label-text">Your E-Mail</span>
+              <label className="label">
+                <span className="label-text">Your E-Mail</span>
               </label>
-              <label class="input-group">
+              <label className="input-group">
                 <input
                   type="text"
                   defaultValue={user?.email}
                   readOnly
                   disabled
-                  class="input w-full rounded-xl"
+                  className="input w-full rounded-xl"
                 />
               </label>
 
-              <label class="label">
-                <span class="label-text">Your Phone</span>
+              <label className="label">
+                <span className="label-text">Your Phone</span>
               </label>
-              <label class="input-group">
+              <label className="input-group">
                 <input
                   type="tel"
                   name="tel"
                   defaultValue={userInfo?.phone}
-                  class="input  input-bordered w-full rounded-xl"
+                  className="input  input-bordered w-full rounded-xl"
                 />
               </label>
 
-              <label class="label">
-                <span class="label-text">Shipping Address</span>
+              <label className="label">
+                <span className="label-text">Shipping Address</span>
               </label>
               <textarea
-                class="textarea textarea-bordered h-24"
+                className="textarea textarea-bordered h-24"
                 name="address"
                 defaultValue={userInfo?.address}
                 placeholder="Your Address"
               ></textarea>
+              <p className="text-center mt-5">SubTotal $ {subTotal}</p>
               <input
-                className="btn btn-primary my-10"
+                className="btn btn-primary my-5"
                 type="submit"
                 value="Place Order"
               />

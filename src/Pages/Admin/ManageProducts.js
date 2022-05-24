@@ -5,20 +5,20 @@ import useProducts from "../../hooks/useProducts";
 const ManageProducts = () => {
   const [products, setProducts] = useProducts();
   const [deleteItem, setDeleteItem] = useState("");
-  if(!products.length){
-    <Loading/>
+  if (!products.length) {
+    <Loading />;
   }
   return (
     <div>
       <div className="">
         <input type="checkbox" id="conform-delete" className="modal-toggle" />
-        <label for="conform-delete" className="modal cursor-pointer">
-          <label className="modal-box relative" for="">
+        <label htmlFor="conform-delete" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
             <h3 className="text-lg font-bold">Are you sure want to delete?</h3>
 
             <div className="modal-action">
               <label
-                for="conform-delete"
+                htmlFor="conform-delete"
                 className="btn btn-error float-right "
                 onClick={() => {
                   fetch(`http://localhost:8080/deleteProduct/${deleteItem}`, {
@@ -37,7 +37,7 @@ const ManageProducts = () => {
               >
                 Yes
               </label>
-              <label for="conform-delete" className="btn btn-success">
+              <label htmlFor="conform-delete" className="btn btn-success">
                 No
               </label>
             </div>
@@ -79,7 +79,7 @@ const ManageProducts = () => {
                   <td>{availableQuantity}</td>
                   <td>
                     <label
-                      for="conform-delete"
+                      htmlFor="conform-delete"
                       className="btn modal-button"
                       onClick={() => setDeleteItem(_id)}
                     >
