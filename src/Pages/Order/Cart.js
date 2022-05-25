@@ -32,7 +32,7 @@ const Cart = () => {
   // for cancel order 
   
   const handelDelete = () => {
-    fetch(`http://localhost:8080/deleteOrder/${deleteItem}`, {
+    fetch(`http://localhost:8080/deleteFromCart/${deleteItem}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

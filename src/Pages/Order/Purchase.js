@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 
 const Purchase = () => {
-    const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
@@ -21,39 +21,47 @@ const Purchase = () => {
     imgLink,
   } = product;
   const [myOrderQuantity, setMyOrderQuantity] = useState(0);
-  let totalPrice = myOrderQuantity * price === 0 ? minimumOrderQuantity * price : myOrderQuantity * price;
-  const handelSubmit = async (e) =>{
-      e.preventDefault();
-      await  setMyOrderQuantity(minimumOrderQuantity);
-      await  setMyOrderQuantity(Number.parseInt(e.target.myOrderQuantity.value));
+  let totalPrice =
+    myOrderQuantity * price === 0
+      ? minimumOrderQuantity * price
+      : myOrderQuantity * price;
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+    await setMyOrderQuantity(minimumOrderQuantity);
+    await setMyOrderQuantity(Number.parseInt(e.target.myOrderQuantity.value));
 
-      if(loading){
-        return <h1>Loading...</h1>
-      }
-      const userEmail = user.email;
-      const item = {productId:`${id}`, myOrderQuantity: Number.parseInt(e.target.myOrderQuantity.value), totalPrice, userEmail, 
+    if (loading) {
+      return <h1>Loading...</h1>;
+    }
+    const userEmail = user.email;
+    const item = {
+      productId: `${id}`,
+      myOrderQuantity: Number.parseInt(e.target.myOrderQuantity.value),
+      totalPrice,
+      userEmail,
       productName,
       price,
       minimumOrderQuantity,
       availableQuantity,
       description,
-      imgLink }
-      // console.log(item);
+      imgLink,
+    };
+    // console.log(item);
 
     // send data to the server
-    fetch("http://localhost:8080/newOrder", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(item),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
+    fetch("http://localhost:8080/add-to-cart", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(item),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
         //   toast.success("Item Added!", { theme: "colored" });
-        });
-  }
+      });
+  };
   return (
     <form onSubmit={handelSubmit}>
       <div className="card lg:card-side bg-base-100 shadow-xl md:w-2/3 lg:w-1/2 mx-auto">
@@ -80,8 +88,8 @@ const Purchase = () => {
               name="myOrderQuantity"
               min={minimumOrderQuantity}
               max={availableQuantity}
-              onChange={(e)=>{
-                  setMyOrderQuantity(e.target.value);
+              onChange={(e) => {
+                setMyOrderQuantity(e.target.value);
               }}
               placeholder="Your Quantity"
               className="input input-bordered w-full"
@@ -89,9 +97,7 @@ const Purchase = () => {
             />
           </div>
 
-          <p className="font-bold">
-            Total Price: $ {totalPrice}
-          </p>
+          <p className="font-bold">Total Price: $ {totalPrice}</p>
 
           <div className="card-actions justify-center">
             <input
@@ -99,7 +105,9 @@ const Purchase = () => {
               value="Add To Card"
               className="btn btn-secondary"
             />
-            <Link to='/cart' className="btn btn-primary">Go To Cart</Link>
+            <Link to="/cart" className="btn btn-primary">
+              Go To Cart
+            </Link>
           </div>
         </div>
       </div>

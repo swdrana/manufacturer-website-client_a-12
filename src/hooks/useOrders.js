@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useOrders = () => {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:8080/orders`)
+    fetch(`http://localhost:8080/carts`)
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [orders]);

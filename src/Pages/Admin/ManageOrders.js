@@ -13,7 +13,7 @@ const ManageOrders = () => {
   }
   const orderShifted = (id) => {
     // for delete a order
-    fetch(`http://localhost:8080/deleteOrder/${id}`, {
+    fetch(`http://localhost:8080/deleteFromCart/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
