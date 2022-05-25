@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../firebase.init";
 import GoogleSignIn from "./GoogleSignIn";
-import {toast} from 'react-toastify';
 const Login = () => {
   const [user] = useAuthState(auth);
   if(user){
@@ -11,7 +10,7 @@ const Login = () => {
     console.log(user);   
     // send updated product to database
     if(email!==null){
-
+    // update user info 
     fetch(`http://localhost:8080/newUser/${email}`, {
       method: "PUT",
       headers: {
@@ -54,9 +53,9 @@ const Login = () => {
                 className="input input-bordered"
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <Link to="#" className="label-text-alt link link-hover">
                   Reset Password!
-                </a>
+                </Link>
               </label>
               <label className="label">
               <Link to="/signup" className="label-text-alt link link-hover">

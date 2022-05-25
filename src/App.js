@@ -23,6 +23,7 @@ import RequireAdmin from "./Auth/RequireAdmin";
 import Purchase from "./Pages/Order/Purchase";
 import Cart from "./Pages/Order/Cart";
 import Payment from "./Pages/Order/Payment";
+import RequireNonAdmin from "./Auth/RequireNonAdmin";
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -44,8 +45,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}> 
             <Route index element={<Profile/>}/>
             <Route path="profile" element={<Profile/>}/>
-            <Route path="my-orders" element={<MyOrders/>}/>
-            <Route path="add-review" element={<AddReview/>}/>
+            <Route path="my-orders" element={<RequireNonAdmin><MyOrders/></RequireNonAdmin>}/>
+            <Route path="add-review" element={<RequireNonAdmin><AddReview/></RequireNonAdmin>}/>
 
             <Route path="manage-orders" element={<RequireAdmin><ManageOrders/></RequireAdmin>}/>
             <Route path="add-product" element={<RequireAdmin><AddProduct/></RequireAdmin>}/>
