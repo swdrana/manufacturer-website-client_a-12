@@ -1,8 +1,10 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import Review from "../../components/Review";
+import useReviews from "../../hooks/useReviews";
 
 const ReviewSec = () => {
+  const [reviews, setReviews] = useReviews();
   return (
     <div>
       <div className="flex flex-col lg:flex-row justify-center items-center py-20 bg-slate-400">
@@ -60,10 +62,11 @@ const ReviewSec = () => {
             slidesToSlide={1}
             swipeable
           >
-            <Review />
-            <Review />
-            <Review />
-            <Review />
+            {
+              reviews.map(review=>{
+                return <Review key={review._id} onePersonReview={review}/>
+              })
+            }
           </Carousel>
         </div>
       </div>
