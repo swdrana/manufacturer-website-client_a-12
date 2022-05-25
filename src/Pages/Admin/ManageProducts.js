@@ -5,7 +5,7 @@ import useProducts from "../../hooks/useProducts";
 const ManageProducts = () => {
   const [products, setProducts] = useProducts();
   const [deleteItem, setDeleteItem] = useState("");
-  if (!products.length) {
+  if (products.length===0) {
     <Loading />;
   }
   return (

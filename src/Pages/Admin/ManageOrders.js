@@ -1,10 +1,61 @@
 
 import React from 'react';
+import useOrders from '../../hooks/useOrders';
+import Loading from './../../components/Loading'
+import { toast } from 'react-toastify';
+import { injectStyle } from "react-toastify/dist/inject-style";
 
+// CALL IT ONCE IN YOUR APP
+injectStyle();
 const ManageOrders = () => {
+    
+    const [orders, setOrders] = useOrders();
+    if(!orders.length){
+        return <Loading/>
+    }
+    const orderShifted = id =>{
+        // for delete a order 
+        fetch(`http://localhost:8080/deleteOrder/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              const remaining = orders.filter((odr) => odr._id !== id);
+              toast.success("Order Shifted!", { theme: "colored" });
+              setOrders(remaining);
+            }
+          });
+    }
     return (
-        <div>
-            ManageOrders
+        <div><div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Photo</th>
+              <th>Order By</th>
+              <th>Quantity</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+              {orders.map((order,index)=>{
+                  return <tr key={order._key}>
+                    <th>{index+1}</th>
+                    <th>{order.productName}</th>
+                    <td><img src={order.imgLink} className="w-20" alt="" /></td>
+                    <td>{order.userEmail}</td>
+                    <td>{order.myOrderQuantity}</td>
+                    <td>{order.isPaid === true ? 
+                    <button className='btn btn-secondary btn-sm' onClick={()=>orderShifted(order._id)}>Shift</button>
+                    : 'Unpaid'}</td>
+                  </tr>
+              })}
+          </tbody>
+        </table>
+      </div>
         </div>
     );
 };

@@ -28,6 +28,9 @@ const Cart = () => {
   }
   // console.log(userInfo);
 
+
+  // for cancel order 
+  
   const handelDelete = () => {
     fetch(`http://localhost:8080/deleteOrder/${deleteItem}`, {
       method: "DELETE",
