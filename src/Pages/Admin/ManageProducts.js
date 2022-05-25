@@ -5,7 +5,7 @@ import useProducts from "../../hooks/useProducts";
 const ManageProducts = () => {
   const [products, setProducts] = useProducts();
   const [deleteItem, setDeleteItem] = useState("");
-  if (products.length===0) {
+  if (!products.length) {
     <Loading />;
   }
   return (
@@ -68,11 +68,11 @@ const ManageProducts = () => {
                 imgLink,
               } = product;
               return (
-                <tr>
+                <tr key={index}>
                   <th>{index + 1}</th>
                   <td>{productName}</td>
                   <td>
-                    <img src={imgLink} alt="" />
+                    <img src={imgLink} alt="" className="w-20" />
                   </td>
                   <td>$ {price}</td>
                   <td>{minimumOrderQuantity}</td>

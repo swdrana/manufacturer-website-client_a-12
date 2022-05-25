@@ -23,7 +23,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
 
-        toast.info("Updated Done!", { theme: "colored" });
+        // toast.info("Updated Done!", { theme: "colored" });
         // e.target.reset();
       });
     }

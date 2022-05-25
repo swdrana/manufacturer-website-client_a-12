@@ -8,7 +8,7 @@ import Loading from "../../components/Loading";
 const AdminManagement = () => {
   const [user, loading] = useAuthState(auth);
   const [users, setUsers] = useUsers();
-  if (loading) {
+  if (loading || !users.length) {
     return <Loading />;
   }
   const makeAdmin = (email) => {
@@ -53,8 +53,8 @@ const AdminManagement = () => {
   };
   return (
     <div>
-      <div class="overflow-x-auto w-full">
-        <table class="table w-full">
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr className="text-center">
@@ -79,9 +79,9 @@ const AdminManagement = () => {
               return (
                 <tr key={_id}>
                   <td>
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
                           <img
                             src={photoURL}
                             alt="Avatar Tailwind CSS Component"
@@ -89,31 +89,35 @@ const AdminManagement = () => {
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold">
+                        <div className="font-bold">
                           {displayName}
-                          { email=='algorana01@gmail.com' && <div class="badge badge-secondary ml-3">CEO</div>}
+                          {email == "algorana01@gmail.com" && (
+                            <div className="badge badge-secondary ml-3">
+                              CEO
+                            </div>
+                          )}
                         </div>
-                        <div class="text-sm opacity-50">{email}</div>
+                        <div className="text-sm opacity-50">{email}</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     {address}
                     <br />
-                    <span class="badge badge-ghost badge-sm">{phone}</span>
+                    <span className="badge badge-ghost badge-sm">{phone}</span>
                   </td>
                   <th className="">
                     <div className="flex justify-center items-center">
                       {isAdmin === true ? (
                         <button
-                          class="btn btn-secondary btn-xs"
+                          className="btn btn-secondary btn-xs"
                           onClick={() => removeAdmin(email)}
                         >
                           Remove Admin
                         </button>
                       ) : (
                         <button
-                          class="btn btn-success btn-xs"
+                          className="btn btn-success btn-xs"
                           onClick={() => makeAdmin(email)}
                         >
                           Make Admin
