@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../firebase.init";
 import GoogleSignIn from "./GoogleSignIn";
-
+import {toast} from 'react-toastify';
 const Login = () => {
   const [user] = useAuthState(auth);
   if(user){
@@ -23,7 +23,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
 
-        // toast.info("Updated Done!", { theme: "colored" });
+        toast.info("Updated Done!", { theme: "colored" });
         // e.target.reset();
       });
     }
