@@ -8,8 +8,8 @@ import Loading from "../../components/Loading";
 const AdminManagement = () => {
   const [user, loading] = useAuthState(auth);
   const [users, setUsers] = useUsers();
-  if(loading){
-      return <Loading/>
+  if (loading) {
+    return <Loading />;
   }
   const makeAdmin = (email) => {
     const user = { isAdmin: true };
@@ -29,26 +29,27 @@ const AdminManagement = () => {
       });
   };
   const removeAdmin = (email) => {
-      if(email===user.email){
-          toast.error("Can't Remove Your Self!");
-      }else{
+    if (email === user.email) {
+      toast.error("Can't Remove Your Self!");
+    } else if (email == "algorana01@gmail.com") {
+      toast.error("Can't Remove CEO", { theme: "dark" });
+    } else {
+      const updateUser = { isAdmin: false };
+      fetch(`http://localhost:8080/newUser/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
 
-    const updateUser = { isAdmin: false };
-    fetch(`http://localhost:8080/newUser/${email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateUser),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-
-        toast.info("Admin Removed!", { theme: "colored" });
-        // e.target.reset();
-      });
-      }
+          toast.info("Admin Removed!", { theme: "colored" });
+          // e.target.reset();
+        });
+    }
   };
   return (
     <div>
@@ -88,7 +89,10 @@ const AdminManagement = () => {
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold">{displayName}</div>
+                        <div class="font-bold">
+                          {displayName}
+                          { email=='algorana01@gmail.com' && <div class="badge badge-secondary ml-3">CEO</div>}
+                        </div>
                         <div class="text-sm opacity-50">{email}</div>
                       </div>
                     </div>
