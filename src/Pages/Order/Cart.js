@@ -53,7 +53,7 @@ const Cart = () => {
       const email = user.email;
       // console.log(updatedUserInfo);
 
-      // send updated product to database
+      // send user Info to database
       if (email !== null) {
         fetch(`http://localhost:8080/newUser/${email}`, {
           method: "PUT",

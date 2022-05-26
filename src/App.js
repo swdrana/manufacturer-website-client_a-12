@@ -24,6 +24,7 @@ import Purchase from "./Pages/Order/Purchase";
 import Cart from "./Pages/Order/Cart";
 import Payment from "./Pages/Order/Payment";
 import RequireNonAdmin from "./Auth/RequireNonAdmin";
+import {ToastContainer} from 'react-toastify'
 // import 'react-icons/all'
 function App() {
   useEffect(()=>{
@@ -31,6 +32,7 @@ function App() {
   },[])
   return (
     <div>
+      <ToastContainer />
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>

@@ -1,24 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import useUserInfo from "../hooks/useUserInfo";
+import { useForm } from "react-hook-form";
+import {toast} from 'react-toastify'
 
 const Profile = () => {
   const [user, loading, error] = useAuthState(auth);
   const [userInfo, setUserInfo] = useUserInfo(user?.email);
-  // console.log(user);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const { register, handleSubmit, errors } = useForm();
+
   if (loading) {
     return <p>Loading</p>;
   }
-  console.log(userInfo);
+  const handenEdit = () => {
+    setIsEdit(true);
+  };
+
+  const onSubmit = (data) => {
+    const email = user.email;
+    // send user Info to database
+    if (email !== null) {
+      fetch(`http://localhost:8080/newUser/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          toast.info("Profile Updated!", { theme: "colored" });
+          // e.target.reset();
+    setIsEdit(false);
+        });
+    }
+  };
+
+  const saveForm = (e) => {
+  };
   return (
     <div>
-      <div className=" bg-base-200 flex-col flex items-center">
-        <h1 className="text-4xl my-4">My Info</h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className=" mt-5 bg-base-200 flex-col flex items-center"
+      >
         <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-3/4 lg:w-2/3 justify-center items-center">
           <div className="flex items-center bg-slate-200 w-full">
-            <div class="avatar p-5 pr-0 w-1/4">
-              <div class=" w-36 mask mask-hexagon">
+            <div className="avatar p-5 pr-0 w-1/4">
+              <div className=" w-36 mask mask-hexagon">
                 <img src={userInfo?.photoURL} alt={userInfo?.displayName} />
               </div>
             </div>
@@ -30,74 +63,148 @@ const Profile = () => {
           </div>
 
           {/* Aditional Info  */}
-          <div class="overflow-x-auto w-full">
-                {/* <!-- row 1 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">Address</div>
-                    <div class="text-sm opacity-50">Add2</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.address}
-                    <br />
-                    <span class="badge badge-ghost badge-sm">
-                      {userInfo?.address2}
-                    </span>
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">Phone</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.phone}
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">Facebook</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.facebook}
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">GitHub</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.github}
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">Linkedin</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.linkedin}
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                <div className="w-full flex flex-row">
-                  <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
-                    <div class="font-bold">Twitter</div>
-                  </div>
-                  <div className=" px-10 py-5 w-5/6 lg:w-10/12">
-                    {userInfo?.twitter}
-                  </div>
-                </div>
-                {/* <!-- row 2 --> */}
-                  <div className=" flex flex-row justify-evenly items-center px-5 lg:px-10 py-5">
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-secondary">Save</button>
-                  </div>
+          <div className="overflow-x-auto w-full">
+            {/* <!-- row 1 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">Address</div>
+                <div className="text-sm opacity-50">City</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    className="input input-bordered input-secondary w-full"
+                    name="address"
+                    defaultValue={userInfo?.address}
+                    {...register("address", {
+                      maxLength: 500,
+                    })}
+                  />
+                ) : (
+                  userInfo?.address
+                )}
+                <br />
+
+                {isEdit ? (
+                  <input
+                    className="input input-bordered w-full mt-1"
+                    defaultValue={userInfo?.city}
+                    {...register("city", { maxLength: 500 })}
+                  />
+                ) : (
+                  <span className="badge badge-ghost badge-sm">
+                    {userInfo?.city}
+                  </span>
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">Phone</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    type="tel"
+                    className="input input-bordered input-secondary w-full"
+                    defaultValue={userInfo?.phone}
+                    {...register("phone", { maxLength: 15 })}
+                  />
+                ) : (
+                  userInfo?.phone
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">Facebook</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    type="text"
+                    className="input input-bordered input-secondary w-full"
+                    defaultValue={userInfo?.facebook}
+                    {...register("facebook", { maxLength: 250 })}
+                  />
+                ) : (
+                  <a href={userInfo?.facebook} target="_blank" className=" text-primary hover:underline">{userInfo?.facebook}</a>
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">GitHub</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    type="text"
+                    className="input input-bordered input-secondary w-full"
+                    defaultValue={userInfo?.github}
+                    {...register("github", { maxLength: 250 })}
+                  />
+                ) : (<a href={userInfo?.github} className=" text-primary hover:underline"  target="_blank" >{userInfo?.github}</a>
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">Linkedin</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    type="text"
+                    className="input input-bordered input-secondary w-full"
+                    defaultValue={userInfo?.linkedin}
+                    {...register("linkedin", { maxLength: 250 })}
+                  />
+                ) : (
+                  <a href={userInfo?.linkedin} target="_blank" className=" text-primary hover:underline">{userInfo?.linkedin}</a>
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className="w-full flex flex-row">
+              <div className=" px-5 lg:px-10 w-1/6 lg:w-2/12 py-5">
+                <div className="font-bold">Twitter</div>
+              </div>
+              <div className=" px-10 py-5 w-5/6 lg:w-10/12">
+                {isEdit ? (
+                  <input
+                    type="text"
+                    className="input input-bordered input-secondary w-full"
+                    defaultValue={userInfo?.twitter}
+                    {...register("twitter", { maxLength: 250 })}
+                  />
+                ) : (
+                  <a href={userInfo?.twitter} target="_blank" className=" text-primary hover:underline">{userInfo?.twitter}</a>
+                )}
+              </div>
+            </div>
+            {/* <!-- row 2 --> */}
+            <div className=" flex flex-row justify-evenly items-center px-5 lg:px-10 py-5">
+              <button
+                className="btn btn-primary"
+                disabled={isEdit}
+                onClick={handenEdit}
+              >
+                Edit
+              </button>
+              <input
+                type="submit"
+                className="btn btn-secondary"
+                disabled={!isEdit}
+              />
             </div>
           </div>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
