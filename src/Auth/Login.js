@@ -21,14 +21,12 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-
         // toast.info("Updated Done!", { theme: "colored" });
-        // e.target.reset();
       });
     }
 
 
-    // make admin if user CEO
+    // make automatic admin if user CEO
     if(email===process.env.REACT_APP_ceoEmail){
       const makeAdmin = { isAdmin: true };
       fetch(`http://localhost:8080/newUser/${email}`, {
