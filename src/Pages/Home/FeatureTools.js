@@ -1,9 +1,12 @@
 import React from "react";
 import Product from "../../components/Product";
 import useProducts from "../../hooks/useProducts";
-
+import Loading from './../../components/Loading'
 const FeatureTools = () => {
   const [products, setProducts] = useProducts();
+  if(!products.length){
+    return <Loading/>
+  }
   return (
     <div>
       <div className="py-16 bg-lime-100">
