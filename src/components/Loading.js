@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const Loading = () => {
-    return (
-        <div className=' h-screen flex items-center justify-center'>
-            <h1 className='text-center text-red-600 text-xl'>Loading...</h1>
-        </div>
-    );
+  return (
+    <div className=" h-screen flex flex-col items-center justify-center gap-5">
+      <h1 className="text-center  text-secondary text-xl">Loading...</h1>
+      <progress className="progress w-56 progress-secondary"></progress>
+    </div>
+  );
 };
 
 export default Loading;

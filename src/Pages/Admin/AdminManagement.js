@@ -12,6 +12,7 @@ const AdminManagement = () => {
   if (loading || !users.length) {
     return <Loading />;
   }
+  
   const makeAdmin = (email) => {
     const user = { isAdmin: true };
     fetch(`http://localhost:8080/newUser/${email}`, {
@@ -32,7 +33,7 @@ const AdminManagement = () => {
   const removeAdmin = (email) => {
     if (email === user.email) {
       toast.error("Can't Remove Your Self!");
-    } else if (email == "algorana01@gmail.com") {
+    } else if (email == process.env.REACT_APP_ceoEmail) {
       toast.error("Can't Remove CEO", { theme: "dark" });
     } else {
       const updateUser = { isAdmin: false };
@@ -62,7 +63,7 @@ const AdminManagement = () => {
               <th>Name</th>
               <th>Address</th>
               <th>Contact</th>
-              <th>Manage Admin</th>
+              <th>Manage A</th>
             </tr>
           </thead>
           <tbody>
@@ -97,11 +98,11 @@ const AdminManagement = () => {
                       <div>
                         <div className="font-bold">
                           {displayName}
-                          {email == "algorana01@gmail.com" && (
+                          {email === process.env.REACT_APP_ceoEmail ? 
                             <div className="badge badge-secondary ml-3">
                               CEO
-                            </div>
-                          )}
+                            </div> : ''
+                          }
                         </div>
                         <div className="text-sm opacity-50">{email}</div>
                       </div>

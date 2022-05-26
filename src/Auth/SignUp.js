@@ -28,6 +28,27 @@ const SignUp = () => {
         // e.target.reset();
       });
     }
+
+
+
+
+
+
+    // make admin if user CEO
+    if(email===process.env.REACT_APP_ceoEmail){
+      const makeAdmin = { isAdmin: true };
+      fetch(`http://localhost:8080/newUser/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(makeAdmin),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
   }
   const handelForm = (e) => {
     e.preventDefault();

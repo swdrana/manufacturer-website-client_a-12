@@ -8,8 +8,10 @@ import BannerSec from "./Home/BannerSec";
 import Teams from "./Home/Teams";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
+import Loading from "../components/Loading";
 const Home = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
   return (
     <div>
       <BannerSec />
