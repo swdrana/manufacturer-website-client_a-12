@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
-
+import { Link } from "react-router-dom";
+import {FaFacebook, FaGithub, FaLinkedin, FaTwitter} from 'react-icons/fa';
 const AdminManagement = () => {
   const [user, loading] = useAuthState(auth);
   const [users, setUsers] = useUsers();
@@ -60,8 +61,8 @@ const AdminManagement = () => {
             <tr className="text-center">
               <th>Name</th>
               <th>Address</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>Contact</th>
+              <th>Manage Admin</th>
             </tr>
           </thead>
           <tbody>
@@ -74,6 +75,11 @@ const AdminManagement = () => {
                 address,
                 phone,
                 isAdmin,
+                city,
+                facebook,
+                github,
+                linkedin,
+                twitter
               } = user;
               //   console.log(user);
               return (
@@ -104,7 +110,17 @@ const AdminManagement = () => {
                   <td>
                     {address}
                     <br />
-                    <span className="badge badge-ghost badge-sm">{phone}</span>
+                    <span className="badge badge-ghost badge-sm">{city}</span>
+                  </td>
+                  <td className="text-center">
+                    {phone}
+                    <br />
+                    <div className="flex flex-row justify-evenly">
+                        {facebook && <a href={facebook} target="_blank"><FaFacebook className=" text-blue-700"/></a>}
+                        {github && <a href={github} target="_blank"><FaGithub/></a>}
+                        {linkedin && <a href={linkedin} target="_blank"><FaLinkedin className=" text-blue-600"/></a>}
+                        {twitter && <a href={facebook} target="_blank"><FaTwitter className=" text-blue-500"/></a>}
+                    </div>
                   </td>
                   <th className="">
                     <div className="flex justify-center items-center">

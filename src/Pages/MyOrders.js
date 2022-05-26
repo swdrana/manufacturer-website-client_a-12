@@ -69,7 +69,7 @@ const MyOrders = () => {
                     <span className="badge badge-ghost badge-sm">{userEmail}</span>
                   </td>
                   <td>
-                    <span className="badge badge-success badge-md">Shifted</span>
+                    <span className="badge badge-success badge-md">{isPaid && 'Paid'}</span>
                   </td>
                 </tr>
               );
