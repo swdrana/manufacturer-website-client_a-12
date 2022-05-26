@@ -10,7 +10,7 @@ const useAdmin = () =>{
 
 
     if (loading) {
-        // return <h1 className="text-center text-red-500 text-3xl">loading........</h1>
+        
     }
     if(user){
         const email = user.email;

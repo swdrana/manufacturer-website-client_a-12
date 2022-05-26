@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import useUserInfo from "../hooks/useUserInfo";
 import { useForm } from "react-hook-form";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
+import Loading from "../components/Loading";
 
 const Profile = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [userInfo, setUserInfo] = useUserInfo(user?.email);
+  const [userInfo, setUserInfo] = useState({});
   const [isEdit, setIsEdit] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
 
   if (loading) {
-    return <p>Loading</p>;
+    return <Loading/>
   }
+  if (user) {
+    const email = user.email;
+    fetch(`http://localhost:8080/userInfo/${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data);
+      });
+  }
+
   const handenEdit = () => {
     setIsEdit(true);
   };
@@ -35,13 +45,12 @@ const Profile = () => {
           console.log(data);
           toast.info("Profile Updated!", { theme: "colored" });
           // e.target.reset();
-    setIsEdit(false);
+          setIsEdit(false);
         });
     }
   };
 
-  const saveForm = (e) => {
-  };
+  const saveForm = (e) => {};
   return (
     <div>
       <form
@@ -130,7 +139,13 @@ const Profile = () => {
                     {...register("facebook", { maxLength: 250 })}
                   />
                 ) : (
-                  <a href={userInfo?.facebook} target="_blank" className=" text-primary hover:underline">{userInfo?.facebook}</a>
+                  <a
+                    href={userInfo?.facebook}
+                    target="_blank"
+                    className=" text-primary hover:underline"
+                  >
+                    {userInfo?.facebook}
+                  </a>
                 )}
               </div>
             </div>
@@ -147,7 +162,14 @@ const Profile = () => {
                     defaultValue={userInfo?.github}
                     {...register("github", { maxLength: 250 })}
                   />
-                ) : (<a href={userInfo?.github} className=" text-primary hover:underline"  target="_blank" >{userInfo?.github}</a>
+                ) : (
+                  <a
+                    href={userInfo?.github}
+                    className=" text-primary hover:underline"
+                    target="_blank"
+                  >
+                    {userInfo?.github}
+                  </a>
                 )}
               </div>
             </div>
@@ -165,7 +187,13 @@ const Profile = () => {
                     {...register("linkedin", { maxLength: 250 })}
                   />
                 ) : (
-                  <a href={userInfo?.linkedin} target="_blank" className=" text-primary hover:underline">{userInfo?.linkedin}</a>
+                  <a
+                    href={userInfo?.linkedin}
+                    target="_blank"
+                    className=" text-primary hover:underline"
+                  >
+                    {userInfo?.linkedin}
+                  </a>
                 )}
               </div>
             </div>
@@ -183,7 +211,13 @@ const Profile = () => {
                     {...register("twitter", { maxLength: 250 })}
                   />
                 ) : (
-                  <a href={userInfo?.twitter} target="_blank" className=" text-primary hover:underline">{userInfo?.twitter}</a>
+                  <a
+                    href={userInfo?.twitter}
+                    target="_blank"
+                    className=" text-primary hover:underline"
+                  >
+                    {userInfo?.twitter}
+                  </a>
                 )}
               </div>
             </div>
