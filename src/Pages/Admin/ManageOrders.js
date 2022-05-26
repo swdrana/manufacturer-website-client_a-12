@@ -1,8 +1,8 @@
 import React from "react";
-import useOrders from "../../hooks/useOrders";
 import Loading from "./../../components/Loading";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import useOrders from "../../hooks/useOrders";
 
 // CALL IT ONCE IN YOUR APP
 injectStyle();
@@ -13,7 +13,8 @@ const ManageOrders = () => {
   }
   const orderShifted = (id) => {
     // for delete a order
-    fetch(`http://localhost:8080/deleteFromCart/${id}`, {
+    console.log(id);
+    fetch(`http://localhost:8080/deleteFromOrders/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -42,7 +43,7 @@ const ManageOrders = () => {
           <tbody>
             {orders.map((order, index) => {
               return (
-                <tr key={order._key}>
+                <tr key={index}>
                   <th>{index + 1}</th>
                   <th>{order.productName}</th>
                   <td>

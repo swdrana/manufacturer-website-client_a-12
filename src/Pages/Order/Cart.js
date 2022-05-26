@@ -207,6 +207,7 @@ const Cart = () => {
                   name="tel"
                   defaultValue={userInfo?.phone}
                   className="input  input-bordered w-full rounded-xl"
+                  required
                 />
               </label>
 
@@ -218,6 +219,7 @@ const Cart = () => {
                 name="address"
                 defaultValue={userInfo?.address}
                 placeholder="Your Address"
+                required
               ></textarea>
               <p className="text-center mt-5">SubTotal $ {subTotal}</p>
               <input
