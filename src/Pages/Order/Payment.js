@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useCart from "../../hooks/useCart";
+import {toast} from 'react-toastify'
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const [user] = useAuthState(auth);
   const [cart, setCart] = useCart(user?.email);
+  const navigate = useNavigate()
   let subTotal = 0;
   cart.map((o) => {
     if (!o.isPaid) {
@@ -38,8 +41,6 @@ const Payment = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-
-          // toast.info("Updated Done!", { theme: "colored" });
           // e.target.reset();
         });
 
@@ -55,6 +56,18 @@ const Payment = () => {
         .then((data) => {
           console.log(data);
           //   toast.success("Item Added!", { theme: "colored" });
+            fetch(`http://localhost:8080/deleteFromCart/${order._id}`, {
+              method: "DELETE",
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.deletedCount > 0) {
+                  const remaining = cart.filter((odr) => odr._id !== order._id);
+                  setCart(remaining);
+                  toast.success("Payment Success.", { theme: "colored" });
+                  navigate('/dashboard/my-orders');
+                }
+              });
         });
     });
   };

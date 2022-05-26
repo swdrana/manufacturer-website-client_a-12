@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-
+import {toast} from 'react-toastify'
 const Purchase = () => {
   const [user, loading, error] = useAuthState(auth);
   const { id } = useParams();
@@ -59,7 +59,7 @@ const Purchase = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        //   toast.success("Item Added!", { theme: "colored" });
+          toast.success("Item Added!", { theme: "colored" });
       });
   };
   return (
