@@ -30,45 +30,54 @@ const Payment = () => {
   const ordered = () => {
     const paidStatus = { isPaid: true };
     cart.map((order) => {
-      fetch(`http://localhost:8080/single-cart/${order._id}`)
+      fetch(`https://etools-server.herokuapp.com/single-cart/${order._id}`)
         .then((res) => res.json())
         .then((data) => console.log(data));
 
       // update paid status in cart
-      fetch(`http://localhost:8080/updateCartStatus/${order._id}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(paidStatus),
-      })
+      fetch(
+        `https://etools-server.herokuapp.com/updateCartStatus/${order._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(paidStatus),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
 
           //to get above updated paid data
-          fetch(`http://localhost:8080/single-cart/${order._id}`)
+          fetch(`https://etools-server.herokuapp.com/single-cart/${order._id}`)
             .then((res) => res.json())
             .then((gotedUpdatedCartData) => {
               console.log("gotedUpdatedCartData: ", gotedUpdatedCartData);
 
               // update: transfer paid order from cartsCollection to ordersCollections
-              fetch(`http://localhost:8080/update-order/${order._id}`, {
-                method: "PUT",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(gotedUpdatedCartData),
-              })
+              fetch(
+                `https://etools-server.herokuapp.com/update-order/${order._id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(gotedUpdatedCartData),
+                }
+              )
                 .then((res) => res.json())
                 .then((data) => {
                   console.log(data);
                   // e.target.reset();
 
                   // delete from cart because already added to ordersCollection
-                  fetch(`http://localhost:8080/deleteFromCart/${order._id}`, {
-                    method: "DELETE",
-                  })
+                  fetch(
+                    `https://etools-server.herokuapp.com/deleteFromCart/${order._id}`,
+                    {
+                      method: "DELETE",
+                    }
+                  )
                     .then((res) => res.json())
                     .then((data) => {
                       if (data.deletedCount > 0) {

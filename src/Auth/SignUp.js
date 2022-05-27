@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import auth from "../firebase.init";
 import GoogleSignIn from "./GoogleSignIn";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import { async } from "@firebase/util";
 
 const SignUp = () => {
@@ -24,14 +24,14 @@ const SignUp = () => {
   ] = useSendEmailVerification(auth);
   const verifyEmail = async () => {
     await sendEmailVerification();
-    toast.info("Sent email! Please Verify",{theme: "colored"});
+    toast.info("Sent email! Please Verify", { theme: "colored" });
   };
 
   const handelForm = async (e) => {
     e.preventDefault();
     const fName = e.target.fname.value;
     const lName = e.target.lname.value;
-    const name = fName+' '+ lName;
+    const name = fName + " " + lName;
     const eMail = e.target.email.value;
     const phone = e.target.phone.value;
     const password = e.target.password.value;
@@ -41,27 +41,27 @@ const SignUp = () => {
     verifyEmail();
     console.log(eMail, password);
 
-
-
-
-
-
-
-    const updatedUserInfo = { phone, password, displayName:name, photoURL:'', email:eMail };
-      // send user Info to database
-        fetch(`http://localhost:8080/newUser/${eMail}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(updatedUserInfo),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            // toast.info("Updated Done!", { theme: "colored" });
-            // e.target.reset();
-          });
+    const updatedUserInfo = {
+      phone,
+      password,
+      displayName: name,
+      photoURL: "",
+      email: eMail,
+    };
+    // send user Info to database
+    fetch(`https://etools-server.herokuapp.com/newUser/${eMail}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedUserInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // toast.info("Updated Done!", { theme: "colored" });
+        // e.target.reset();
+      });
   };
 
   if (loading || sendingEmailVerification) {
@@ -72,7 +72,7 @@ const SignUp = () => {
     console.log(user);
     // send updated user to database
     if (email !== null) {
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -89,7 +89,7 @@ const SignUp = () => {
     // make automatic admin if user CEO
     if (email === process.env.REACT_APP_ceoEmail) {
       const makeAdmin = { isAdmin: true };
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -101,7 +101,7 @@ const SignUp = () => {
           console.log(data);
         });
     }
-    navigate('/');
+    navigate("/");
   }
   return (
     <div>
@@ -191,8 +191,7 @@ const SignUp = () => {
             </label>
             <div className="form-control mt-1">
               <p className=" text-error text-center mb-2">
-                {(error) &&
-                  (error?.message)}
+                {error && error?.message}
               </p>
               <button className="btn btn-primary">Register</button>
             </div>

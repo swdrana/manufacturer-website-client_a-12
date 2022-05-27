@@ -6,11 +6,11 @@ const useUserInfo = (email) => {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:8080/userInfo/${email}`)
+    fetch(`https://etools-server.herokuapp.com/userInfo/${email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }, [userInfo]);
-  return  [userInfo, setUserInfo];
+  return [userInfo, setUserInfo];
 };
 
 export default useUserInfo;

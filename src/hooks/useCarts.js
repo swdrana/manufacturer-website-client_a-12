@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 const useCarts = () => {
   const [carts, setCarts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:8080/carts`)
+    fetch(`https://etools-server.herokuapp.com/carts`)
       .then((res) => res.json())
       .then((data) => setCarts(data));
   }, [carts]);
   // useEffect(() => {
-  //   fetch(`http://localhost:8080/orders`)
+  //   fetch(`https://etools-server.herokuapp.com/orders`)
   //     .then((res) => res.json())
   //     .then((data) => setOrders(data));
   // }, [orders]);

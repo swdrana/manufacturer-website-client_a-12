@@ -14,7 +14,7 @@ const ManageOrders = () => {
   const orderShifted = (id) => {
     // for delete a order
     console.log(id);
-    fetch(`http://localhost:8080/deleteFromOrders/${id}`, {
+    fetch(`https://etools-server.herokuapp.com/deleteFromOrders/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

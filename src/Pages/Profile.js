@@ -14,11 +14,11 @@ const Profile = () => {
   const { register, handleSubmit, errors } = useForm();
 
   if (loading) {
-    return <Loading/>
+    return <Loading />;
   }
   if (user) {
     const email = user.email;
-    fetch(`http://localhost:8080/userInfo/${email}`)
+    fetch(`https://etools-server.herokuapp.com/userInfo/${email}`)
       .then((res) => res.json())
       .then((data) => {
         setUserInfo(data);
@@ -33,7 +33,7 @@ const Profile = () => {
     const email = user.email;
     // send user Info to database
     if (email !== null) {
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

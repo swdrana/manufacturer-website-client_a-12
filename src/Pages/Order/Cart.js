@@ -22,17 +22,16 @@ const Cart = () => {
     return <Loading />;
   }
   if (user) {
-    fetch(`http://localhost:8080/userInfo/${user.email}`)
+    fetch(`https://etools-server.herokuapp.com/userInfo/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }
   // console.log(userInfo);
 
+  // for cancel order
 
-  // for cancel order 
-  
   const handelDelete = () => {
-    fetch(`http://localhost:8080/deleteFromCart/${deleteItem}`, {
+    fetch(`https://etools-server.herokuapp.com/deleteFromCart/${deleteItem}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -55,7 +54,7 @@ const Cart = () => {
 
       // send user Info to database
       if (email !== null) {
-        fetch(`http://localhost:8080/newUser/${email}`, {
+        fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",

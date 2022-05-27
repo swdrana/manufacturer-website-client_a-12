@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 const Purchase = () => {
   const [user, loading, error] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:8080/singleProduct/${id}`)
+    fetch(`https://etools-server.herokuapp.com/singleProduct/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [product]);
@@ -49,7 +49,7 @@ const Purchase = () => {
     // console.log(item);
 
     // send data to the server
-    fetch("http://localhost:8080/add-to-cart", {
+    fetch("https://etools-server.herokuapp.com/add-to-cart", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -59,7 +59,7 @@ const Purchase = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-          toast.success("Item Added!", { theme: "colored" });
+        toast.success("Item Added!", { theme: "colored" });
       });
   };
   return (

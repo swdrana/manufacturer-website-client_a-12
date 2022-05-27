@@ -5,17 +5,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
-import {FaFacebook, FaGithub, FaLinkedin, FaTwitter} from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 const AdminManagement = () => {
   const [user, loading] = useAuthState(auth);
   const [users, setUsers] = useUsers();
   if (loading || !users.length) {
     return <Loading />;
   }
-  
+
   const makeAdmin = (email) => {
     const user = { isAdmin: true };
-    fetch(`http://localhost:8080/newUser/${email}`, {
+    fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -37,7 +37,7 @@ const AdminManagement = () => {
       toast.error("Can't Remove CEO", { theme: "dark" });
     } else {
       const updateUser = { isAdmin: false };
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -80,7 +80,7 @@ const AdminManagement = () => {
                 facebook,
                 github,
                 linkedin,
-                twitter
+                twitter,
               } = user;
               //   console.log(user);
               return (
@@ -98,11 +98,13 @@ const AdminManagement = () => {
                       <div>
                         <div className="font-bold">
                           {displayName}
-                          {email === process.env.REACT_APP_ceoEmail ? 
+                          {email === process.env.REACT_APP_ceoEmail ? (
                             <div className="badge badge-secondary ml-3">
                               CEO
-                            </div> : ''
-                          }
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <div className="text-sm opacity-50">{email}</div>
                       </div>
@@ -117,10 +119,26 @@ const AdminManagement = () => {
                     {phone}
                     <br />
                     <div className="flex flex-row justify-evenly">
-                        {facebook && <a href={facebook} target="_blank"><FaFacebook className=" text-blue-700"/></a>}
-                        {github && <a href={github} target="_blank"><FaGithub/></a>}
-                        {linkedin && <a href={linkedin} target="_blank"><FaLinkedin className=" text-blue-600"/></a>}
-                        {twitter && <a href={facebook} target="_blank"><FaTwitter className=" text-blue-500"/></a>}
+                      {facebook && (
+                        <a href={facebook} target="_blank">
+                          <FaFacebook className=" text-blue-700" />
+                        </a>
+                      )}
+                      {github && (
+                        <a href={github} target="_blank">
+                          <FaGithub />
+                        </a>
+                      )}
+                      {linkedin && (
+                        <a href={linkedin} target="_blank">
+                          <FaLinkedin className=" text-blue-600" />
+                        </a>
+                      )}
+                      {twitter && (
+                        <a href={facebook} target="_blank">
+                          <FaTwitter className=" text-blue-500" />
+                        </a>
+                      )}
                     </div>
                   </td>
                   <th className="">

@@ -17,8 +17,8 @@ const Login = () => {
     formState: { errors },
   } = useForm(); // initialize the hook
 
-  if(loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />;
   }
   if (user) {
     const email = user.email;
@@ -26,7 +26,7 @@ const Login = () => {
     // send updated product to database
     if (email !== null) {
       // update user info
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -43,7 +43,7 @@ const Login = () => {
     // make automatic admin if user CEO
     if (email === process.env.REACT_APP_ceoEmail) {
       const makeAdmin = { isAdmin: true };
-      fetch(`http://localhost:8080/newUser/${email}`, {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -79,7 +79,11 @@ const Login = () => {
                 type="text"
                 placeholder="email"
                 className="input input-bordered"
-                {...register("email", { pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}, { required: true, maxLength: 250 })}
+                {...register(
+                  "email",
+                  { pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i },
+                  { required: true, maxLength: 250 }
+                )}
               />
 
               {errors.email && (
@@ -117,8 +121,7 @@ const Login = () => {
             </div>
             <div className="form-control mt-1">
               <p className=" text-error text-center mb-2">
-                {(error) &&
-                  (error?.message)}
+                {error && error?.message}
               </p>
               <input type="submit" className="btn btn-primary" value="Login" />
             </div>

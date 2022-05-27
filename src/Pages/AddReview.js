@@ -4,7 +4,7 @@ import auth from "../firebase.init";
 import Loading from "./../components/Loading";
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -12,7 +12,6 @@ const colors = {
 const AddReview = () => {
   const [user, loading, error] = useAuthState(auth);
   const { register, handleSubmit, errors } = useForm();
-
 
   //for rating
   //rating start
@@ -33,35 +32,33 @@ const AddReview = () => {
   };
   // rating end
 
-
-
   if (loading) {
     return <Loading />;
   }
   const onSubmit = (data) => {
-      const email = user.email;
-      const photoURL = user.photoURL;
-      const displayName = user.displayName;
-    const review = { ...data, rating, email, photoURL, displayName};
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const displayName = user.displayName;
+    const review = { ...data, rating, email, photoURL, displayName };
     console.log(review);
 
     // add review to database
-    fetch("http://localhost:8080/add-review", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(review),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if(data.result==='data received!'){
-            toast.success("Review Added!", { theme: "colored" });
-          }
-          console.log(data);
-        });
-    }
+    fetch("https://etools-server.herokuapp.com/add-review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result === "data received!") {
+          toast.success("Review Added!", { theme: "colored" });
+        }
+        console.log(data);
+      });
+  };
   return (
     <div className="w-full p-10  lg:w-1/2 mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-0">
