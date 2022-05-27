@@ -8,8 +8,6 @@ const useAdmin = () => {
   const [admin, setAdmin] = useState(false);
   const [adminLoading, setAdminLoading] = useState(true);
 
-  if (loading) {
-  }
   if (user) {
     const email = user.email;
     fetch(`https://etools-server.herokuapp.com/userInfo/${email}`)

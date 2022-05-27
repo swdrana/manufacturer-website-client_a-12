@@ -58,7 +58,7 @@ const Profile = () => {
         className=" mt-5 bg-base-200 flex-col flex items-center"
       >
         <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-3/4 lg:w-2/3 justify-center items-center">
-          <div className="flex items-center bg-slate-200 w-full">
+          <div className="flex items-center bg-[#4b6bfb45] w-full">
             <div className="avatar p-5 pr-0 w-1/4">
               <div className=" w-36 mask mask-hexagon">
                 <img src={userInfo?.photoURL} alt={userInfo?.displayName} />

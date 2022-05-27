@@ -2,9 +2,13 @@ import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import { BiSlider } from "react-icons/bi";
+import Loading from '../components/Loading'
 
 const Dashboard = () => {
-  const [admin] = useAdmin();
+  const [admin, adminLoading] = useAdmin();
+  if(adminLoading){
+    return <Loading/>
+  }
   return (
     <div>
       <div className="drawer drawer-mobile bg-base-200">
