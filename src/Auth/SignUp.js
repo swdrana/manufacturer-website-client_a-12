@@ -31,7 +31,7 @@ const SignUp = () => {
     e.preventDefault();
     const fName = e.target.fname.value;
     const lName = e.target.lname.value;
-    const name = fName + lName;
+    const name = fName+' '+ lName;
     const eMail = e.target.email.value;
     const phone = e.target.phone.value;
     const password = e.target.password.value;

@@ -20,6 +20,11 @@ const GoogleSignIn = () => {
   return (
     <div>
       <div className=" px-8 pb-8">
+
+      <p className=" text-error text-center mb-2">
+                {(errorGoogle) &&
+                  (errorGoogle?.message)}
+              </p>
         <button
           className="btn btn-primary w-full  btn-outline"
           onClick={() => signInWithGoogle()}

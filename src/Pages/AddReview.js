@@ -10,7 +10,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 const AddReview = () => {
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const { register, handleSubmit, errors } = useForm();
 
 
