@@ -135,9 +135,6 @@ const Nav = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
-              </li>
-              <li>
                 <button onClick={logout}>Log Out</button>
               </li>
             </ul>
@@ -170,6 +167,9 @@ const Nav = () => {
                 <Link to="services">Services</Link>
               </li>
               <li>
+                <Link to="blogs">Blogs</Link>
+              </li>
+              <li>
                 <Link to="about">My Portfolio</Link>
               </li>
               {user && (
@@ -186,10 +186,7 @@ const Nav = () => {
               )}
               {!user && (
                 <li>
-                  <Link
-                    to="signup"
-                    className="btn btn-error text-black-100 ml-4"
-                  >
+                  <Link to="signup" className="btn btn-error text-black-100 ml-4">
                     Create Account
                   </Link>
                 </li>
