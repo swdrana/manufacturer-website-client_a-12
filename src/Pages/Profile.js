@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
-import useUserInfo from "../hooks/useUserInfo";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";

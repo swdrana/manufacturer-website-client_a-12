@@ -50,7 +50,7 @@ const Nav = () => {
               <Link to="services">Services</Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="about">My Portfolio</Link>
             </li>
             {user && (
               <li>
@@ -167,7 +167,7 @@ const Nav = () => {
                 <Link to="services">Services</Link>
               </li>
               <li>
-                <Link to="about">About</Link>
+                <Link to="about">My Portfolio</Link>
               </li>
               {user && (
                 <li>
