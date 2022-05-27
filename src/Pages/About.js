@@ -15,6 +15,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import TechnologyAndTools from "../components/TechnologyAndTools";
 const About = () => {
   return (
     <div className=" bg-base-200">
@@ -29,7 +30,7 @@ const About = () => {
               MERN Stack Developer
             </p>
             <hr class=" border-[1px] border-yellow-400" />
-            <p className="py-4 text-justify">
+            <p className="pt-2 text-justify">
               I am a computer science student at{" "}
               <a href="http://www.njupt.edu.cn/" target="_blank">
                 <strong className="hover:underline hover:text-blue-600">
@@ -42,45 +43,45 @@ const About = () => {
               can see samples of some of the projects I have done.
             </p>
             {/* Social  */}
-            <div className="w-1/2 mx-auto flex justify-evenly">
+            <div className="w-1/2 mx-auto flex justify-evenly my-1">
               <a
                 href="https://facebook.com/swdrana"
-                className="hover:text-blue-600 p-2"
+                className="hover:text-blue-600 "
                 target="_blank"
               >
                 <FaFacebook size={40} />
               </a>
               <a
                 href="https://github.com/swdrana"
-                className="hover:text-gray-600 p-2"
+                className="hover:text-gray-600 "
                 target="_blank"
               >
                 <FaGithub size={40} />
               </a>
               <a
                 href="https://www.linkedin.com/in/swdrana/"
-                className="hover:text-blue-500 p-2"
+                className="hover:text-blue-500"
                 target="_blank"
               >
                 <FaLinkedinIn size={40} />
               </a>
               <a
                 href="https://www.youtube.com/swdrana"
-                className="hover:text-red-600 p-2"
+                className="hover:text-red-600"
                 target="_blank"
               >
                 <FaYoutube size={40} />
               </a>
               <a
                 href="https://twitter.com/swdrana"
-                className="hover:text-blue-500 p-2"
+                className="hover:text-blue-500"
                 target="_blank"
               >
                 <FaTwitter size={40} />
               </a>
             </div>
             {/* Email  */}
-            <div className="flex justify-center my-3">
+            <div className="flex justify-center mb-2">
               <strong>Email: &nbsp;&nbsp;</strong>
               <a
                 href="mailto:codingbengal@gmail.com"
@@ -92,7 +93,7 @@ const About = () => {
               </a>
             </div>
             {/* Education  */}
-            <div class=" flex justify-between my-5">
+            <div class=" flex justify-between ">
               <div>
                 <div class="font-bold">BSc in Computer Science Engineering</div>
                 <div class="text-sm opacity-50">
@@ -110,7 +111,7 @@ const About = () => {
                 <div class="text-sm opacity-50">Shariatpur, Bangladesh.</div>
               </div>
             </div>
-
+            <TechnologyAndTools />
             <hr class=" border-[1px] border-yellow-400" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
