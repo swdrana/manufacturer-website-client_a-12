@@ -118,8 +118,8 @@ const Nav = () => {
         {user && (
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={user?.photoURL}/>
+              <div className="w-10 rounded-full bg-slate-600  bg-opacity-50">
+                <img src={user?.photoURL} alt={user?.displayName}/>
               </div>
             </label>
             <ul

@@ -38,7 +38,6 @@ const Login = () => {
           console.log(data);
           // toast.info("Updated Done!", { theme: "colored" });
         });
-        navigate(from, { replace: true });
     }
 
     // make automatic admin if user CEO
@@ -56,6 +55,8 @@ const Login = () => {
           console.log(data);
         });
     }
+
+    navigate(from, { replace: true });
   }
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
