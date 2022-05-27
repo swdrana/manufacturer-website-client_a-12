@@ -30,10 +30,18 @@ const About = () => {
             </p>
             <hr class=" border-[1px] border-yellow-400" />
             <p className="py-4 text-justify">
-            I am a computer science student at  <a href="http://www.njupt.edu.cn/" target='_blank'><strong  className="hover:underline hover:text-blue-600">Nanjing University Posts & Telecommunication</strong></a> in <strong>Nanjing, Jiangsu, China.</strong> My mission this year is to be a
-              web developer. I am constantly working hard for this and hopefully
-              I will be able to reach my destination. Below you can see samples of some of the projects I have done.
+              I am a computer science student at{" "}
+              <a href="http://www.njupt.edu.cn/" target="_blank">
+                <strong className="hover:underline hover:text-blue-600">
+                  Nanjing University Posts & Telecommunication
+                </strong>
+              </a>{" "}
+              in <strong>Nanjing, Jiangsu, China.</strong> My mission this year
+              is to be a web developer. I am constantly working hard for this
+              and hopefully I will be able to reach my destination. Below you
+              can see samples of some of the projects I have done.
             </p>
+            {/* Social  */}
             <div className="w-1/2 mx-auto flex justify-evenly">
               <a
                 href="https://facebook.com/swdrana"
@@ -71,9 +79,39 @@ const About = () => {
                 <FaTwitter size={40} />
               </a>
             </div>
+            {/* Email  */}
             <div className="flex justify-center my-3">
               <strong>Email: &nbsp;&nbsp;</strong>
-            <a href="mailto:codingbengal@gmail.com"target="_blank" className="hover:underline hover:text-orange-600" title="Click me to send email">codingbengal@gmail.com</a></div>
+              <a
+                href="mailto:codingbengal@gmail.com"
+                target="_blank"
+                className="hover:underline hover:text-orange-600"
+                title="Click me to send email"
+              >
+                codingbengal@gmail.com
+              </a>
+            </div>
+            {/* Education  */}
+            <div class=" flex justify-between my-5">
+              <div>
+                <div class="font-bold">BSc in Computer Science Engineering</div>
+                <div class="text-sm opacity-50">
+                  Nanjing University Posts & Telecommunication
+                </div>
+                <div class="text-sm opacity-50">Nanjing, Jiangxu, China.</div>
+              </div>
+              <div>
+                <div class="font-bold">
+                  Diploma in Telecommunication Engineer
+                </div>
+                <div class="text-sm opacity-50">
+                  Shariatpur Polytechnic Institute.
+                </div>
+                <div class="text-sm opacity-50">Shariatpur, Bangladesh.</div>
+              </div>
+            </div>
+
+            <hr class=" border-[1px] border-yellow-400" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <img
