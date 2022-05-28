@@ -27,9 +27,27 @@ const Profile = () => {
   const handenEdit = () => {
     setIsEdit(true);
   };
-
-  const onSubmit = (data) => {
+  const sendUserInfoToDatabase = (userData) => {
     const email = user.email;
+    // send user Info to database
+    if (email !== null) {
+      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          toast.info("Profile Updated!", { theme: "colored" });
+          // e.target.reset();
+          setIsEdit(false);
+        });
+    }
+  };
+  const onSubmit = (data) => {
     console.log(data);
 
     // imgbb
@@ -60,27 +78,12 @@ const Profile = () => {
               twitter: data.twitter,
             };
             console.log(withImgbbData);
-
-    // send user Info to database
-    
-    if (email !== null) {
-      fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(withImgbbData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          toast.info("Profile Updated!", { theme: "colored" });
-          // e.target.reset();
-          setIsEdit(false);
-        });
-    }
+            sendUserInfoToDatabase(withImgbbData);
           }
         });
+    }else{
+      const withOutImgData = {...data, photoURL:user.photoURL}
+      sendUserInfoToDatabase(withOutImgData);
     }
   };
 
