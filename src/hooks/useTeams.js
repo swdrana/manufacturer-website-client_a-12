@@ -4,7 +4,7 @@ const useTeams = () => {
 
   const [teams, setTeams] = useState([]);
   useEffect(() => {
-    fetch("https://etools-server.herokuapp.com/")
+    fetch("https://etools-server.herokuapp.com/teams")
       .then((res) => res.json())
       .then((data) => setTeams(data));
   }, [teams]);
