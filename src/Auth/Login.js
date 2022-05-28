@@ -109,7 +109,7 @@ const Login = () => {
                 <p className="text-error text-sm">Minimum 6 Length Require</p>
               )}
               <label className="label">
-                <Link to="#" className="label-text-alt link link-hover">
+                <Link to="/resetPassword" className="label-text-alt link link-hover">
                   Reset Password!
                 </Link>
               </label>
