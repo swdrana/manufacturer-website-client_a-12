@@ -1,0 +1,42 @@
+[
+  {
+    "id":"1",
+    "name": "swdRana",
+    "deg": "CEO",
+    "photo":"https://i.ibb.co/qgght5q/Masuduzzaman-Transparent-BG.png",
+    "facebook": "https://facebook.com/swdrana",
+    "twitter": "https://twitter.com/swdrana",
+    "linkedin": "https://www.linkedin.com/in/swdrana/",
+    "instagram": "https://www.instagram.com/swdrana/"
+  },
+  {
+    "id":"2",
+    "name": "Jon Smith",
+    "deg": "CEO",
+    "photo":"https://i.ibb.co/rbCKP72/image.png",
+    "facebook": "https://facebook.com/swdrana",
+    "twitter": "https://twitter.com/swdrana",
+    "linkedin": "https://www.linkedin.com/in/swdrana/",
+    "instagram": "https://www.instagram.com/swdrana/"
+  },
+  {
+    "id":"3",
+    "name": "swdRana",
+    "deg": "CEO",
+    "photo":"https://i.ibb.co/c3JD3Ry/image.png",
+    "facebook": "https://facebook.com/swdrana",
+    "twitter": "https://twitter.com/swdrana",
+    "linkedin": "https://www.linkedin.com/in/swdrana/",
+    "instagram": "https://www.instagram.com/swdrana/"
+  },
+  {
+    "id":"4",
+    "name": "swdRana",
+    "deg": "CEO",
+    "photo":"https://i.ibb.co/L1GcF1V/Masuduzzaman-Transparent-BG.png",
+    "facebook": "https://facebook.com/swdrana",
+    "twitter": "https://twitter.com/swdrana",
+    "linkedin": "https://www.linkedin.com/in/swdrana/",
+    "instagram": "https://www.instagram.com/swdrana/"
+  }
+]
