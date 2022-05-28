@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 
 const Profile = () => {
+  const imgStoreKey = "262e7d4ee7c68ebbd1d0f36491313d7a";
   const [user, loading, error] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState({});
   const [isEdit, setIsEdit] = useState(false);
-
   const { register, handleSubmit, errors } = useForm();
 
   if (loading) {
@@ -30,14 +30,46 @@ const Profile = () => {
 
   const onSubmit = (data) => {
     const email = user.email;
+    console.log(data);
+
+    // imgbb
+
+    const image = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=262e7d4ee7c68ebbd1d0f36491313d7a`;
+
+    if (data?.photo[0]) {
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          if (result.success) {
+            console.log(result);
+            const withImgbbData = {
+              address: data.address,
+              city: data.city,
+              facebook: data.facebook,
+              github: data.github,
+              linkedin: data.linkedin,
+              phone: data.phone,
+              photoURL: result.data.url,
+              twitter: data.twitter,
+            };
+            console.log(withImgbbData);
+
     // send user Info to database
+    
     if (email !== null) {
       fetch(`https://etools-server.herokuapp.com/newUser/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(withImgbbData),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -45,6 +77,9 @@ const Profile = () => {
           toast.info("Profile Updated!", { theme: "colored" });
           // e.target.reset();
           setIsEdit(false);
+        });
+    }
+          }
         });
     }
   };
@@ -59,9 +94,18 @@ const Profile = () => {
         <div className="card flex-shrink-0 shadow-2xl bg-base-100 w-3/4 lg:w-2/3 justify-center items-center">
           <div className="flex items-center bg-[#4b6bfb45] w-full">
             <div className="avatar p-5 pr-0 w-1/4">
-              <div className=" w-36 mask mask-hexagon">
-                <img src={userInfo?.photoURL} alt={userInfo?.displayName} />
-              </div>
+              {isEdit ? (
+                <input
+                  className="input input-bordered input-secondary w-full"
+                  type="file"
+                  name="photo"
+                  {...register("photo", {})}
+                />
+              ) : (
+                <div className=" w-36 mask mask-hexagon">
+                  <img src={userInfo?.photoURL} alt={userInfo?.displayName} />
+                </div>
+              )}
             </div>
             {/* Name Section  */}
             <div>

@@ -104,6 +104,7 @@ const Payment = () => {
       >
         <input
           type="number"
+          className="input input-info"
           name="inputMoney"
           id=""
           placeholder="Type Payable Amount"
