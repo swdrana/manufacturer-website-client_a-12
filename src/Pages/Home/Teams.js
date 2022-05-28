@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
+import useTeams from "../../hooks/useTeams";
 import TeamPersone from "./TeamPersone";
 
 const Teams = () => {
-  const [teams, setTeams] = useState([]);
-  useEffect(() => {
-    fetch("teams.json")
-      .then((res) => res.json())
-      .then((data) => setTeams(data));
-  }, [teams]);
+  const [teams, setTeams] = useTeams();
   return (
     <div className="hero">
       <div className=" hero-overlay">
@@ -20,7 +16,7 @@ const Teams = () => {
               {teams.map((singleTeamPersonInfo) => {
                 return (
                   <TeamPersone
-                    key={singleTeamPersonInfo.id}
+                    key={singleTeamPersonInfo._id}
                     singleTeamPersonInfo={singleTeamPersonInfo}
                   />
                 );
